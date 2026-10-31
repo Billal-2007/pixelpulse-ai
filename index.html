@@ -260,6 +260,51 @@
             }
         });
 
+        <!-- AI Prompt Customizer Section -->
+<section class="section-box">
+    <h2>AI Prompt Customizer & Generator</h2>
+    <p>Build custom cinematic prompts for your wildlife documentary episodes:</p>
+    
+    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+        <select id="promptSubject" style="flex: 1; min-width: 200px;">
+            <option value="Elephant herd walking African savanna">Elephant Herd (Savanna)</option>
+            <option value="Tiger walking through deep jungle slow motion">Tiger in Deep Jungle</option>
+            <option value="Cheetah running fast wildlife action">Cheetah Speed Action</option>
+            <option value="Pod of dolphins swimming in crystal clear ocean">Ocean Dolphins</option>
+        </select>
+        
+        <select id="promptStyle" style="flex: 1; min-width: 200px;">
+            <option value="Cinematic 4K, slow motion, professional lighting">Cinematic 4K (Slow Motion)</option>
+            <option value="8K resolution, Unreal Engine 5 render, hyper-realistic">8K Hyper-Realistic</option>
+            <option value="National Geographic documentary style, natural ambient look">National Geographic Style</option>
+        </select>
+        
+        <button onclick="generateCustomPrompt()">Generate Prompt</button>
+    </div>
+    
+    <div id="customPromptOutput" style="margin-top: 15px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid var(--border-color); font-family: monospace; font-size: 14px; min-height: 45px; display: flex; align-items: center; justify-content: space-between;">
+        <span id="promptText" style="color: #94a3b8;">Your custom generated prompt will appear here...</span>
+        <button onclick="copyCustomPrompt()" style="padding: 5px 10px; font-size: 12px; background: var(--btn-copy);">Copy</button>
+    </div>
+</section>
+
+<script>
+    function generateCustomPrompt() {
+        const subject = document.getElementById('promptSubject').value;
+        const style = document.getElementById('promptStyle').value;
+        const finalPrompt = `${subject}, ${style}, 48fps, flawless nature videography.`;
+        document.getElementById('promptText').innerText = finalPrompt;
+        document.getElementById('promptText').style.color = 'var(--text-color)';
+    }
+
+    function copyCustomPrompt() {
+        const text = document.getElementById('promptText').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Custom prompt copied to clipboard!');
+        });
+    }
+</script>
+
         // Single Copy function
         function copyText(button) {
             const codeText = button.previousElementSibling.innerText;
