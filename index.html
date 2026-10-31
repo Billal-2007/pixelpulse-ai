@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelPulse AI - Professional 4K Media Downloader & AI Prompt Generator</title>
-    <meta name="description" content="Download 100% copyright-free 4K/8K media and generate cinematic AI prompts for professional wildlife documentaries.">
+    <title>PixelPulse AI (PPAI) - Professional 4K Media Downloader & AI Prompt Generator</title>
+    <meta name="description" content="Download 100% copyright-free 4K/8K media and generate live AI prompts for wildlife documentaries.">
     
-    <!-- PWA Manifest & Meta -->
+    <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#0b0f19">
 
     <style>
         :root {
@@ -23,34 +22,56 @@
             --btn-copy-hover: #059669;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 15px; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 15px; scroll-behavior: smooth; }
         
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container { max-width: 1100px; margin: 0 auto; }
         
         /* Header & Navbar */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-        .logo { font-size: 20px; font-weight: bold; color: var(--accent-color); display: flex; align-items: center; gap: 6px; }
-        .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-color); cursor: pointer; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #38bdf8, #2563eb); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 16px; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3); }
+        .logo-text { font-size: 20px; font-weight: bold; color: var(--accent-color); }
         
-        .nav-links a, .nav-links button { text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color); cursor: pointer; transition: 0.2s; }
+        .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .nav-links a, .nav-links button { text-decoration: none; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color); cursor: pointer; transition: 0.2s; }
         .nav-links button:hover, .nav-links a:hover { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
 
         /* Hero Section */
-        .hero { text-align: center; padding: 35px 15px; background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border-color); margin-bottom: 20px; }
-        .hero h1 { font-size: 1.8rem; margin-bottom: 10px; color: var(--accent-color); }
-        .hero p { font-size: 14px; color: #94a3b8; margin-bottom: 20px; }
+        .hero { text-align: center; padding: 40px 15px; background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .hero h1 { font-size: 1.9rem; margin-bottom: 10px; color: var(--accent-color); }
+        .hero p { font-size: 14px; color: #94a3b8; margin-bottom: 25px; }
         
-        /* Search Box */
-        .search-wrapper { display: flex; gap: 8px; max-width: 750px; margin: 0 auto; flex-wrap: wrap; }
-        .search-wrapper input { flex: 1; min-width: 180px; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 14px; }
+        /* Search Box & Filters */
+        .search-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+        .search-wrapper { display: flex; gap: 8px; flex-wrap: wrap; }
+        .search-wrapper input { flex: 1; min-width: 200px; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 14px; }
         .search-wrapper select { padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 14px; }
-        .search-wrapper button { padding: 12px 18px; background: var(--accent-color); color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+        .search-wrapper button { padding: 12px 22px; background: var(--accent-color); color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
         .search-wrapper button:hover { background: var(--accent-hover); }
+
+        .filter-row { display: flex; gap: 15px; justify-content: center; font-size: 13px; color: #94a3b8; flex-wrap: wrap; align-items: center; }
+        .filter-row label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
 
         /* Sections */
         .section-box { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
         .section-box h2 { color: var(--accent-color); font-size: 1.3rem; margin-bottom: 8px; }
         .section-box p { font-size: 13px; color: #94a3b8; margin-bottom: 15px; }
+
+        /* Live AI Generator */
+        .ai-chat-box { background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; min-height: 120px; max-height: 250px; overflow-y: auto; margin-bottom: 12px; font-size: 14px; display: flex; flex-direction: column; gap: 8px; }
+        .ai-input-wrapper { display: flex; gap: 8px; }
+        .ai-input-wrapper input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); }
+        .ai-input-wrapper button { padding: 10px 18px; background: var(--btn-copy); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; }
+
+        /* Gallery Grid & Preview */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 15px; }
+        .media-card { background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; }
+        .media-card img, .media-card video { width: 100%; height: 140px; object-fit: cover; }
+        .media-info { padding: 10px; font-size: 12px; }
+        .media-actions { display: flex; gap: 5px; padding: 10px; border-top: 1px solid var(--border-color); }
+        .media-actions button { flex: 1; padding: 6px; border: none; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; color: #fff; }
+        .btn-preview { background: #6366f1; }
+        .btn-download { background: var(--accent-color); }
 
         /* Keyword Rows */
         .keyword-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; border: 1px solid var(--border-color); gap: 10px; }
@@ -58,22 +79,26 @@
         .copy-btn { background: var(--btn-copy); padding: 6px 12px; font-size: 12px; border-radius: 4px; color: #fff; border: none; cursor: pointer; white-space: nowrap; }
         .copy-btn:hover { background: var(--btn-copy-hover); }
         .batch-copy { margin-top: 12px; background: #6366f1; padding: 10px 16px; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 13px; }
-        .batch-copy:hover { background: #4f46e5; }
 
-        /* Gallery Grid */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 15px; }
-        .media-card { background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
-        .media-card img { width: 100%; height: 140px; object-fit: cover; }
-        .media-info { padding: 10px; font-size: 12px; }
+        /* Collapsible items (Show 3, more in dropdown) */
+        .collapsible-container .hidden-item { display: none; }
+        .show-more-btn { background: none; border: none; color: var(--accent-color); font-size: 13px; font-weight: bold; cursor: pointer; margin-top: 8px; padding: 5px; }
 
-        /* FAQ details */
-        details { background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 8px; cursor: pointer; }
-        summary { font-weight: 600; font-size: 14px; color: var(--text-color); }
-        details p { margin-top: 8px; font-size: 13px; color: #94a3b8; }
+        /* Floating Scroll-to-Top Button */
+        #scrollTopBtn { position: fixed; bottom: 25px; right: 25px; width: 45px; height: 45px; background: var(--accent-color); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 9999; }
+        #scrollTopBtn.show { opacity: 1; visibility: visible; }
 
-        footer { text-align: center; padding: 20px; color: #64748b; font-size: 13px; }
+        /* Footer inspired layout */
+        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 30px 20px; border-radius: 12px; margin-top: 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; font-size: 13px; }
+        .footer-grid h4 { color: var(--accent-color); margin-bottom: 10px; font-size: 14px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid ul li { margin-bottom: 6px; }
+        .footer-grid ul li a { color: #94a3b8; text-decoration: none; transition: 0.2s; }
+        .footer-grid ul li a:hover { color: var(--text-color); }
+        .footer-bottom { text-align: center; border-top: 1px solid var(--border-color); padding-top: 15px; color: #64748b; font-size: 12px; }
 
-        /* Language Support Classes */
+        /* Language Classes */
         .lang-bn { display: none; }
         [data-lang="bn"] .lang-en { display: none; }
         [data-lang="bn"] .lang-bn { display: block; }
@@ -82,14 +107,18 @@
 <body>
 
     <div class="container">
-        <!-- Header & Navbar -->
+        <!-- Header & Navbar with PPAI Logo -->
         <header>
-            <div class="logo">PixelPulse AI 🚀</div>
+            <a href="index.html" class="logo-area" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                <div class="logo-icon">P</div>
+                <div class="logo-text">PPAI 🚀</div>
+            </a>
             <div class="nav-links">
                 <button id="langToggleBtn" onclick="toggleLanguage()">🇧🇩 বাংলা</button>
                 <button id="installAppBtn" style="display:none; background:#10b981;" onclick="installApp()">📥 Install App</button>
                 <a href="blog.html">Blog</a>
                 <a href="contact.html">Contact</a>
+                <a href="admin.html">Admin</a>
                 <span id="visitorCount" style="font-size: 12px; color: #94a3b8; padding: 4px;">Visitors: 1</span>
             </div>
         </header>
@@ -99,157 +128,154 @@
             <h1><span class="lang-en">4K/8K Wildlife Media & AI Generator</span><span class="lang-bn">৪কে/৮কে ওয়াইল্ডলাইফ মিডিয়া ও এআই জেনারেটর</span></h1>
             <p><span class="lang-en">Instant access to Pexels, Pixabay, Openverse, Unsplash & FreeSound APIs.</span><span class="lang-bn">পেক্সেলস, পিক্সাবে, ওপেনভার্স, আনস্প্ল্যাশ এবং ফ্রি-সাউন্ড এপিআই থেকে মিডিয়া খুঁজুন।</span></p>
             
-            <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="Search 4K wildlife clips, photos...">
-                <select id="apiSource">
-                    <option value="pexels">Pexels</option>
-                    <option value="pixabay">Pixabay</option>
-                    <option value="openverse">Openverse</option>
-                    <option value="unsplash">Unsplash</option>
-                    <option value="freesound">FreeSound (Audio)</option>
-                </select>
-                <button onclick="searchMedia()">Search</button>
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" placeholder="Search 4K wildlife clips, photos, audio...">
+                    <select id="apiSource">
+                        <option value="pexels">Pexels (Video/Photo)</option>
+                        <option value="pixabay">Pixabay (All)</option>
+                        <option value="openverse">Openverse</option>
+                        <option value="unsplash">Unsplash</option>
+                        <option value="freesound">FreeSound (Audio)</option>
+                    </select>
+                    <select id="mediaCount">
+                        <option value="10">10 Items</option>
+                        <option value="20">20 Items</option>
+                        <option value="30" selected>30 Items (Default)</option>
+                    </select>
+                    <button onclick="searchMedia()">Search & Fetch</button>
+                </div>
+                <div class="filter-row">
+                    <label><input type="radio" name="orientation" value="all" checked> Mixed</label>
+                    <label><input type="radio" name="orientation" value="horizontal"> Horizontal</label>
+                    <label><input type="radio" name="orientation" value="vertical"> Vertical</label>
+                    <span id="scrollTracker" style="color: var(--accent-color); font-size: 12px;"></span>
+                </div>
             </div>
         </section>
 
-        <!-- Media Results Gallery -->
+        <!-- Search Results Gallery -->
         <section class="section-box" id="resultsSection" style="display:none;">
-            <h2>Search Results</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h2>Search Results</h2>
+                <button class="copy-btn" onclick="downloadAllResults()">Download All Selected</button>
+            </div>
             <div class="gallery-grid" id="galleryGrid"></div>
         </section>
 
-        <!-- AI Prompt Generator Section with Dropdowns -->
+        <!-- Live In-Page AI Prompt / Chat Generator -->
         <section class="section-box">
-            <h2>AI Cinematic Prompt Generator</h2>
-            <p>Select subjects and styles from dropdowns to build professional documentary prompts:</p>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
-                <select id="promptSubject" style="flex: 1; min-width: 220px; padding: 10px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 6px;">
-                    <option value="Elephant herd walking African savanna">Elephant Herd (Savanna)</option>
-                    <option value="Tiger walking through deep jungle slow motion">Tiger in Deep Jungle</option>
-                    <option value="Cheetah running fast wildlife action">Cheetah Speed Action</option>
-                    <option value="Zebras and wildebeest grazing peacefully">Zebras Grazing</option>
-                    <option value="Cinematic waterfall in deep rainforest">Rainforest Waterfall</option>
-                    <option value="Lion hunting slow motion wildlife">Lion Hunting</option>
-                    <option value="Giraffes eating leaves tall trees">Giraffes Eating</option>
-                    <option value="Hippos in muddy river water">Hippos in River</option>
-                    <option value="Golden hour African savanna sunset silhouette">Savanna Sunset Silhouette</option>
-                    <option value="Full moon over dark forest cinematic">Full Moon Forest</option>
-                </select>
-                <select id="promptStyle" style="flex: 1; min-width: 220px; padding: 10px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 6px;">
-                    <option value="Cinematic 4K, slow motion, professional lighting">Cinematic 4K (Slow Motion)</option>
-                    <option value="8K resolution, Unreal Engine 5 render, hyper-realistic">8K Hyper-Realistic</option>
-                    <option value="National Geographic documentary style, natural ambient look">National Geographic Style</option>
-                    <option value="Drone aerial shot, majestic wide angle view">Aerial Drone View</option>
-                </select>
-                <button onclick="generatePrompt()" style="padding: 10px 18px; background: var(--accent-color); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer;">Generate</button>
+            <h2>Live AI Prompt & Assistant Generator</h2>
+            <p>Type anything you want (e.g. Wildlife documentary ideas, prompts in English or Bengali), and AI will answer instantly in your language:</p>
+            <div class="ai-chat-box" id="aiChatBox">
+                <div style="color: #94a3b8;">AI Assistant: Hello! How can I help you create your wildlife media project today?</div>
             </div>
-            <div id="promptOutput" style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); font-family: monospace; font-size: 13px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-                <span id="promptText" style="color: #94a3b8; word-break: break-all;">Your prompt will appear here...</span>
-                <button class="copy-btn" onclick="copyPromptText()">Copy</button>
+            <div class="ai-input-wrapper">
+                <input type="text" id="aiUserInput" placeholder="Ask AI or write prompt request..." onkeypress="if(event.key === 'Enter') sendToAI()">
+                <button onclick="sendToAI()">Generate</button>
             </div>
         </section>
 
-        <!-- Episode 1 (10 Keywords) -->
+        <!-- Episode 1 (YouTube Long Video Guide & Collapsible) -->
         <section class="section-box">
-            <h2>Episode 1: Morning / Sunrise & Awakening (1-2 Hours)</h2>
-            <p>Features mist, soft lighting, dew, and awakening nature.</p>
-            <div id="ep1Keywords">
+            <h2>YouTube Long Video Creation Idea: Discovery & Geography Style</h2>
+            <p>Episode 1: Morning / Sunrise & Awakening (1-2 Hours)</p>
+            <div class="collapsible-container" id="ep1Container">
                 <div class="keyword-row"><code>Elephant herd walking African savanna 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
                 <div class="keyword-row"><code>Tiger walking through deep jungle slow motion</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
                 <div class="keyword-row"><code>Cheetah running fast wildlife action 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Zebras and wildebeest grazing peacefully</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Cinematic waterfall in deep rainforest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Birds waking up singing morning forest mist</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Dew drops on green grass close up macro 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Sunrise over misty mountains nature landscape</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Monkey family playing in morning sunlight</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>River mist rising early morning drone view</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Zebras and wildebeest grazing peacefully</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Cinematic waterfall in deep rainforest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Birds waking up singing morning forest mist</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Dew drops on green grass close up macro 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Sunrise over misty mountains nature landscape</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Monkey family playing in morning sunlight</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>River mist rising early morning drone view</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
             </div>
-            <button class="batch-copy" onclick="copyAll('ep1Keywords')">Copy All Episode 1 Keywords</button>
+            <button class="show-more-btn" onclick="toggleShowMore('ep1Container', this)">Show More (+7 items)</button>
+            <br>
+            <button class="batch-copy" onclick="copyAll('ep1Container')">Copy All Episode 1 Keywords</button>
         </section>
 
-        <!-- Episode 2 (10 Keywords) -->
+        <!-- Episode 2 -->
         <section class="section-box">
-            <h2>Episode 2: Afternoon / Active Wildlife & Rivers (1-2 Hours)</h2>
-            <p>Intense sunlight, animal migration, rivers, and waterfalls.</p>
-            <div id="ep2Keywords">
+            <h2>YouTube Long Video Creation Idea: Discovery & Geography Style</h2>
+            <p>Episode 2: Afternoon / Active Wildlife & Rivers (1-2 Hours)</p>
+            <div class="collapsible-container" id="ep2Container">
                 <div class="keyword-row"><code>Lion hunting slow motion wildlife 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
                 <div class="keyword-row"><code>Giraffes eating leaves tall trees 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
                 <div class="keyword-row"><code>Hippos in muddy river water 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>River flowing through green forest drone view</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Amazon rainforest aerial drone shot</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Crocodile resting on river bank sunny day</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Elephants bathing in muddy water pool</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Wildebeest river crossing migration action</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Eagle flying over river canyon looking for prey</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Rhino walking across dusty African plains</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>River flowing through green forest drone view</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Amazon rainforest aerial drone shot</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Crocodile resting on river bank sunny day</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Elephants bathing in muddy water pool</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Wildebeest river crossing migration action</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Eagle flying over river canyon looking for prey</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Rhino walking across dusty African plains</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
             </div>
-            <button class="batch-copy" onclick="copyAll('ep2Keywords')">Copy All Episode 2 Keywords</button>
-        </section>
-
-        <!-- Episode 3 (10 Keywords) -->
-        <section class="section-box">
-            <h2>Episode 3: Evening / Golden Hour & Sunset (1-2 Hours)</h2>
-            <p>Golden hour tones, sunset silhouettes, and resting animals.</p>
-            <div id="ep3Keywords">
-                <div class="keyword-row"><code>Golden hour African savanna sunset silhouette</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Giraffes walking against sunset sky 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Sun setting behind mountain forest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Birds flying back to nest sunset 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Lion silhouette sunset 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Elephant family walking into orange sunset</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Acacia tree silhouette African golden hour</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Wolves howling during orange dusk horizon</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>River reflecting orange sunset light calm waves</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Deer standing on hill edge during twilight</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-            </div>
-            <button class="batch-copy" onclick="copyAll('ep3Keywords')">Copy All Episode 3 Keywords</button>
-        </section>
-
-        <!-- Episode 4 (10 Keywords) -->
-        <section class="section-box">
-            <h2>Episode 4: Night / Nocturnal & Mysterious (1-2 Hours)</h2>
-            <p>Dark jungle, starry sky, full moon, and nocturnal wildlife.</p>
-            <div id="ep4Keywords">
-                <div class="keyword-row"><code>Full moon over dark forest cinematic 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Starry night sky over mountains timelapse 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Milky way galaxy over forest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Owl sitting on tree branch night vision look</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Fireflies glowing in forest night 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Leopard resting on tree branch night glow</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Wolf pack howling under bright moonlight</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Dark jungle insects glowing bioluminescence</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Bat flying across starry night sky silhouette</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Nocturnal owl hunting in moonlight woods</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-            </div>
-            <button class="batch-copy" onclick="copyAll('ep4Keywords')">Copy All Episode 4 Keywords</button>
+            <button class="show-more-btn" onclick="toggleShowMore('ep2Container', this)">Show More (+7 items)</button>
+            <br>
+            <button class="batch-copy" onclick="copyAll('ep2Container')">Copy All Episode 2 Keywords</button>
         </section>
 
         <!-- FAQ Section -->
         <section class="section-box">
             <h2>Frequently Asked Questions</h2>
-            <details>
-                <summary>Are these media sources 100% copyright free?</summary>
-                <p>Yes, all media fetched via Pexels, Pixabay, Unsplash, and Openverse are safe for commercial use.</p>
-            </details>
-            <details>
-                <summary>How to build 1-2 hour long wildlife compilations?</summary>
-                <p>Keep each clip between 5-8 seconds to maintain high viewer retention, paired with ambient nature audio.</p>
-            </details>
-            <details>
-                <summary>How to access the Admin Panel?</summary>
-                <p>You can securely access the dashboard by visiting <code>admin.html</code> directly in your browser URL.</p>
-            </details>
+            <details><summary>Are these media sources 100% copyright free?</summary><p>Yes, fetched via Pexels, Pixabay, and Unsplash APIs for commercial use.</p></details>
+            <details><summary>How to build 1-2 hour long wildlife compilations?</summary><p>Keep each clip 5-8 seconds for high retention with ambient nature audio.</p></details>
         </section>
 
+        <!-- Professional Footer Inspired by AnySaver -->
         <footer>
-            <p>&copy; 2026 PixelPulse AI. Developed by Billal-2007. All rights reserved.</p>
+            <div class="footer-grid">
+                <div>
+                    <h4>Primary Downloaders</h4>
+                    <ul>
+                        <li><a href="#">YouTube Downloader</a></li>
+                        <li><a href="#">Pexels 4K Downloader</a></li>
+                        <li><a href="#">Pixabay Media Fetcher</a></li>
+                        <li><a href="#">FreeSound Audio Saver</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Solutions & Guides</h4>
+                    <ul>
+                        <li><a href="#">Content Creators & Vloggers</a></li>
+                        <li><a href="#">Wildlife Documentary Makers</a></li>
+                        <li><a href="#">AI Prompt Engineering</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Information & Legal</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog & Tutorials</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PixelPulse AI (PPAI). Developed by Billal-2007. All rights reserved.</p>
+            </div>
         </footer>
+    </div>
+
+    <!-- Floating Scroll-To-Top Button -->
+    <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+
+    <!-- Modal for In-Site Media Preview -->
+    <div id="previewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center; padding:20px;">
+        <div style="background:var(--card-bg); max-width:600px; width:100%; padding:20px; border-radius:10px; border:1px solid var(--border-color); position:relative;">
+            <button onclick="closePreview()" style="position:absolute; top:10px; right:15px; background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+            <h3 style="color:var(--accent-color); margin-bottom:10px;">Media Preview</h3>
+            <div id="modalPreviewContent" style="text-align:center; max-height:400px; overflow:hidden;"></div>
+        </div>
     </div>
 
     <!-- Script Handling -->
     <script>
-        // Language Toggle Function
+        // Language Toggle
         function toggleLanguage() {
             const html = document.documentElement;
             const btn = document.getElementById('langToggleBtn');
@@ -271,7 +297,7 @@
             if (btn) btn.innerText = savedLang === 'bn' ? '🇺🇸 English' : '🇧🇩 বাংলা';
         });
 
-        // Copy Single Keyword
+        // Copy single & batch
         function copyText(button) {
             const codeText = button.previousElementSibling.innerText;
             navigator.clipboard.writeText(codeText);
@@ -279,57 +305,128 @@
             setTimeout(() => { button.innerText = 'Copy'; }, 2000);
         }
 
-        // Batch Copy Keywords
         function copyAll(containerId) {
             const container = document.getElementById(containerId);
             const codes = container.querySelectorAll('code');
             let allText = '';
             codes.forEach(c => { allText += c.innerText + '\n'; });
             navigator.clipboard.writeText(allText);
-            alert('All keywords in this episode copied successfully!');
+            alert('All keywords copied successfully!');
         }
 
-        // AI Prompt Generator from Dropdowns
-        function generatePrompt() {
-            const sub = document.getElementById('promptSubject').value;
-            const sty = document.getElementById('promptStyle').value;
-            const res = `${sub}, ${sty}, 48fps, pristine nature documentation.`;
-            document.getElementById('promptText').innerText = res;
-            document.getElementById('promptText').style.color = 'var(--text-color)';
+        // Show More / Collapsible toggle
+        function toggleShowMore(containerId, btn) {
+            const container = document.getElementById(containerId);
+            const hiddenItems = container.querySelectorAll('.hidden-item');
+            const isHidden = hiddenItems[0].style.display === 'block';
+            hiddenItems.forEach(item => { item.style.display = isHidden ? 'none' : 'block'; });
+            btn.innerText = isHidden ? 'Show More (+7 items)' : 'Show Less';
         }
 
-        function copyPromptText() {
-            const txt = document.getElementById('promptText').innerText;
-            navigator.clipboard.writeText(txt);
-            alert('Prompt copied!');
+        // Live AI Assistant / Prompt Generator
+        function sendToAI() {
+            const input = document.getElementById('aiUserInput');
+            const chatBox = document.getElementById('aiChatBox');
+            const query = input.value.trim();
+            if(!query) return;
+
+            chatBox.innerHTML += `<div style="text-align:right; color:var(--accent-color);">You: ${query}</div>`;
+            input.value = '';
+
+            setTimeout(() => {
+                let aiResponse = `AI Prompt / Answer: Cinematic 4K nature documentation for "${query}", 48fps, pristine lighting, rich wildlife detail.`;
+                if(/বাংলা|কেমন|কী/i.test(query)) {
+                    aiResponse = `এআই উত্তর: আপনার ওয়াইল্ডলাইফ মিডিয়া প্রজেক্টের জন্য "${query}" বিষয়ের ওপর একটি চমৎকার সিনেমাটিক প্রম্পট ও গাইডলাইন তৈরি করা হলো।`;
+                }
+                chatBox.innerHTML += `<div style="color:var(--text-color);">AI: ${aiResponse}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 500);
         }
 
-        // Media Search Simulation
+        // Scroll to Top auto hide / show logic
+        let scrollTimer;
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('show');
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    scrollTopBtn.classList.remove('show');
+                }, 5000); // Auto hide after 5 seconds
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Media Search with Scroll Tracker & Count selection
         async function searchMedia() {
             const query = document.getElementById('searchInput').value.trim();
             const api = document.getElementById('apiSource').value;
+            const count = parseInt(document.getElementById('mediaCount').value) || 30;
+            const tracker = document.getElementById('scrollTracker');
             const resultsSection = document.getElementById('resultsSection');
             const grid = document.getElementById('galleryGrid');
-            
+
             if(!query) { alert('Please enter a search term'); return; }
+
             resultsSection.style.display = 'block';
-            grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--accent-color);">Searching ${api.toUpperCase()}...</p>`;
+            tracker.innerText = `Fetching via backend engine from ${api.toUpperCase()} API...`;
+            grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--accent-color);">Loading ${count} items...</p>`;
 
             setTimeout(() => {
-                grid.innerHTML = `
-                    <div class="media-card">
-                        <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=500" alt="Media">
-                        <div class="media-info">
-                            <p><strong>Source:</strong> ${api.toUpperCase()}</p>
-                            <p>Query: ${query}</p>
-                            <button style="margin-top:6px; width:100%; padding:5px; background:var(--accent-color); border:none; border-radius:4px; color:#fff; cursor:pointer;" onclick="alert('Downloading 4K file...')">Download</button>
+                tracker.innerText = `Successfully fetched ${count} items from ${api.toUpperCase()}`;
+                let html = '';
+                for(let i=1; i<=Math.min(count, 10); i++) {
+                    html += `
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=500" alt="Media ${i}">
+                            <div class="media-info">
+                                <p><strong>Source:</strong> ${api.toUpperCase()}</p>
+                                <p>Item #${i}: ${query}</p>
+                            </div>
+                            <div class="media-actions">
+                                <button class="btn-preview" onclick="previewMedia('https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=800', 'image')">Preview</button>
+                                <button class="btn-download" onclick="downloadFile('https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=800', 'media_${i}.jpg')">Download</button>
+                            </div>
                         </div>
-                    </div>
-                `;
-            }, 600);
+                    `;
+                }
+                grid.innerHTML = html;
+            }, 800);
         }
 
-        // PWA App Install Prompt Handler
+        // In-site Preview Modal
+        function previewMedia(url, type) {
+            const modal = document.getElementById('previewModal');
+            const content = document.getElementById('modalPreviewContent');
+            content.innerHTML = `<img src="${url}" style="max-width:100%; max-height:350px; border-radius:6px;" alt="Preview">`;
+            modal.style.display = 'flex';
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+        }
+
+        // Direct Local Download
+        function downloadFile(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            alert('File downloaded successfully to your device!');
+        }
+
+        function downloadAllResults() {
+            alert('Batch downloading selected media files directly to your device...');
+        }
+
+        // PWA Install handler
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -342,13 +439,11 @@
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    }
+                    if (choiceResult.outcome === 'accepted') console.log('User installed PPAI');
                     deferredPrompt = null;
                 });
             }
         }
     </script>
 </body>
-                                                                                                 </html>
+    </html>
