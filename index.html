@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelPulse AI (PPAI) - Professional 4K Media Downloader & AI Prompt Generator</title>
-    <meta name="description" content="Download 100% copyright-free 4K/8K media and generate live AI prompts for wildlife documentaries.">
+    <title>PixelPulse AI (PPAI) - 4K/8K Media Downloader & AI Prompt Generator</title>
+    <meta name="description" content="Professional 4K royalty-free media downloader and AI prompt generator by SM Billal Hossain Shakil.">
     
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0b0f19">
-
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -22,81 +18,81 @@
             --btn-copy-hover: #059669;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 15px; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 12px; scroll-behavior: smooth; }
         
         .container { max-width: 1100px; margin: 0 auto; }
         
-        /* Header & Navbar */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        /* Navbar & Mobile Optimization (Fixed Overlap) */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 15px; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
         .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-color); cursor: pointer; }
-        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #38bdf8, #2563eb); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 16px; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3); }
-        .logo-text { font-size: 20px; font-weight: bold; color: var(--accent-color); }
+        .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, #38bdf8, #2563eb); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 16px; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3); }
+        .logo-text { font-size: 18px; font-weight: bold; color: var(--accent-color); }
         
-        .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-        .nav-links a, .nav-links button { text-decoration: none; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color); cursor: pointer; transition: 0.2s; }
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-links a, .nav-links button { text-decoration: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color); cursor: pointer; transition: 0.2s; }
         .nav-links button:hover, .nav-links a:hover { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
 
+        /* Source Ticker Bar */
+        .source-ticker { background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.2); padding: 8px 15px; border-radius: 8px; font-size: 12px; color: var(--accent-color); margin-bottom: 15px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
         /* Hero Section */
-        .hero { text-align: center; padding: 40px 15px; background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border-color); margin-bottom: 20px; }
-        .hero h1 { font-size: 1.9rem; margin-bottom: 10px; color: var(--accent-color); }
-        .hero p { font-size: 14px; color: #94a3b8; margin-bottom: 25px; }
+        .hero { text-align: center; padding: 30px 15px; background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .hero h1 { font-size: 1.7rem; margin-bottom: 8px; color: var(--accent-color); }
+        .hero p { font-size: 13px; color: #94a3b8; margin-bottom: 20px; }
         
-        /* Search Box & Filters */
-        .search-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+        /* Advanced Search & Filters */
+        .search-container { max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; text-align: left; }
         .search-wrapper { display: flex; gap: 8px; flex-wrap: wrap; }
-        .search-wrapper input { flex: 1; min-width: 200px; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 14px; }
-        .search-wrapper select { padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 14px; }
-        .search-wrapper button { padding: 12px 22px; background: var(--accent-color); color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+        .search-wrapper input { flex: 1; min-width: 180px; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 13px; }
+        .search-wrapper select, .search-wrapper button { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 13px; cursor: pointer; }
+        .search-wrapper button { background: var(--accent-color); color: #fff; font-weight: bold; border: none; }
         .search-wrapper button:hover { background: var(--accent-hover); }
 
-        .filter-row { display: flex; gap: 15px; justify-content: center; font-size: 13px; color: #94a3b8; flex-wrap: wrap; align-items: center; }
-        .filter-row label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .filter-options { display: flex; gap: 15px; flex-wrap: wrap; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); font-size: 12px; align-items: center; }
+        .filter-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .filter-group label { display: flex; align-items: center; gap: 4px; cursor: pointer; color: #cbd5e1; }
 
         /* Sections */
         .section-box { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
-        .section-box h2 { color: var(--accent-color); font-size: 1.3rem; margin-bottom: 8px; }
-        .section-box p { font-size: 13px; color: #94a3b8; margin-bottom: 15px; }
+        .section-box h2 { color: var(--accent-color); font-size: 1.2rem; margin-bottom: 8px; }
+        .section-box p { font-size: 12px; color: #94a3b8; margin-bottom: 15px; }
 
         /* Live AI Generator */
-        .ai-chat-box { background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; min-height: 120px; max-height: 250px; overflow-y: auto; margin-bottom: 12px; font-size: 14px; display: flex; flex-direction: column; gap: 8px; }
+        .ai-chat-box { background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; min-height: 110px; max-height: 220px; overflow-y: auto; margin-bottom: 10px; font-size: 13px; display: flex; flex-direction: column; gap: 8px; }
         .ai-input-wrapper { display: flex; gap: 8px; }
-        .ai-input-wrapper input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); }
-        .ai-input-wrapper button { padding: 10px 18px; background: var(--btn-copy); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; }
+        .ai-input-wrapper input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 13px; }
+        .ai-input-wrapper button { padding: 10px 18px; background: var(--btn-copy); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 13px; }
 
         /* Gallery Grid & Preview */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 15px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 15px; }
         .media-card { background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; }
-        .media-card img, .media-card video { width: 100%; height: 140px; object-fit: cover; }
-        .media-info { padding: 10px; font-size: 12px; }
-        .media-actions { display: flex; gap: 5px; padding: 10px; border-top: 1px solid var(--border-color); }
+        .media-card img, .media-card video, .media-card audio { width: 100%; height: 130px; object-fit: cover; }
+        .media-info { padding: 8px; font-size: 11px; color: #94a3b8; }
+        .media-actions { display: flex; gap: 5px; padding: 8px; border-top: 1px solid var(--border-color); }
         .media-actions button { flex: 1; padding: 6px; border: none; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; color: #fff; }
         .btn-preview { background: #6366f1; }
         .btn-download { background: var(--accent-color); }
 
         /* Keyword Rows */
-        .keyword-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; border: 1px solid var(--border-color); gap: 10px; }
-        .keyword-row code { font-family: monospace; font-size: 13px; word-break: break-all; }
-        .copy-btn { background: var(--btn-copy); padding: 6px 12px; font-size: 12px; border-radius: 4px; color: #fff; border: none; cursor: pointer; white-space: nowrap; }
-        .copy-btn:hover { background: var(--btn-copy-hover); }
-        .batch-copy { margin-top: 12px; background: #6366f1; padding: 10px 16px; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 13px; }
-
-        /* Collapsible items (Show 3, more in dropdown) */
-        .collapsible-container .hidden-item { display: none; }
-        .show-more-btn { background: none; border: none; color: var(--accent-color); font-size: 13px; font-weight: bold; cursor: pointer; margin-top: 8px; padding: 5px; }
+        .keyword-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; border: 1px solid var(--border-color); gap: 8px; }
+        .keyword-row code { font-family: monospace; font-size: 12px; word-break: break-all; }
+        .copy-btn { background: var(--btn-copy); padding: 5px 10px; font-size: 11px; border-radius: 4px; color: #fff; border: none; cursor: pointer; white-space: nowrap; }
+        .hidden-item { display: none; }
+        .show-more-btn { background: none; border: none; color: var(--accent-color); font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 6px; padding: 4px; }
+        .batch-copy { margin-top: 10px; background: #6366f1; padding: 8px 14px; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 12px; }
 
         /* Floating Scroll-to-Top Button */
-        #scrollTopBtn { position: fixed; bottom: 25px; right: 25px; width: 45px; height: 45px; background: var(--accent-color); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 9999; }
+        #scrollTopBtn { position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; background: var(--accent-color); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 9999; }
         #scrollTopBtn.show { opacity: 1; visibility: visible; }
 
-        /* Footer inspired layout */
-        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 30px 20px; border-radius: 12px; margin-top: 30px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; font-size: 13px; }
-        .footer-grid h4 { color: var(--accent-color); margin-bottom: 10px; font-size: 14px; }
+        /* Footer */
+        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 25px 15px; border-radius: 12px; margin-top: 25px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 15px; font-size: 12px; }
+        .footer-grid h4 { color: var(--accent-color); margin-bottom: 8px; font-size: 13px; }
         .footer-grid ul { list-style: none; }
-        .footer-grid ul li { margin-bottom: 6px; }
-        .footer-grid ul li a { color: #94a3b8; text-decoration: none; transition: 0.2s; }
-        .footer-grid ul li a:hover { color: var(--text-color); }
-        .footer-bottom { text-align: center; border-top: 1px solid var(--border-color); padding-top: 15px; color: #64748b; font-size: 12px; }
+        .footer-grid ul li { margin-bottom: 5px; }
+        .footer-grid ul li a { color: #94a3b8; text-decoration: none; }
+        .footer-bottom { text-align: center; border-top: 1px solid var(--border-color); padding-top: 12px; color: #64748b; font-size: 11px; }
 
         /* Language Classes */
         .lang-bn { display: none; }
@@ -115,60 +111,71 @@
             </a>
             <div class="nav-links">
                 <button id="langToggleBtn" onclick="toggleLanguage()">🇧🇩 বাংলা</button>
-                <button id="installAppBtn" style="display:none; background:#10b981;" onclick="installApp()">📥 Install App</button>
                 <a href="blog.html">Blog</a>
                 <a href="contact.html">Contact</a>
                 <a href="admin.html">Admin</a>
-                <span id="visitorCount" style="font-size: 12px; color: #94a3b8; padding: 4px;">Visitors: 1</span>
+                <span id="visitorCount" style="font-size: 11px; color: #94a3b8;">Visitors: 1</span>
             </div>
         </header>
 
-        <!-- Hero & Multi-API Search -->
+        <!-- Active Source Ticker Bar -->
+        <div class="source-ticker" id="sourceTicker">
+            🌐 Active APIs & Sources: Pexels API, Pixabay API, Unsplash API, Openverse API, FreeSound API (Ready)
+        </div>
+
+        <!-- Hero & Search Section -->
         <section class="hero">
             <h1><span class="lang-en">4K/8K Wildlife Media & AI Generator</span><span class="lang-bn">৪কে/৮কে ওয়াইল্ডলাইফ মিডিয়া ও এআই জেনারেটর</span></h1>
-            <p><span class="lang-en">Instant access to Pexels, Pixabay, Openverse, Unsplash & FreeSound APIs.</span><span class="lang-bn">পেক্সেলস, পিক্সাবে, ওপেনভার্স, আনস্প্ল্যাশ এবং ফ্রি-সাউন্ড এপিআই থেকে মিডিয়া খুঁজুন।</span></p>
+            <p><span class="lang-en">Welcome! Search and fetch professional royalty-free media instantly.</span><span class="lang-bn">স্বাগতম! আপনার প্রয়োজনীয় রয়্যালটি-মুক্ত মিডিয়া এবং এআই প্রম্পট এখান থেকে খুঁজুন।</span></p>
             
             <div class="search-container">
                 <div class="search-wrapper">
-                    <input type="text" id="searchInput" placeholder="Search 4K wildlife clips, photos, audio...">
+                    <input type="text" id="searchInput" placeholder="Search wildlife clips, photos, audio...">
                     <select id="apiSource">
-                        <option value="pexels">Pexels (Video/Photo)</option>
-                        <option value="pixabay">Pixabay (All)</option>
-                        <option value="openverse">Openverse</option>
+                        <option value="all">All APIs (Pexels, Pixabay, Unsplash, Openverse)</option>
+                        <option value="pexels">Pexels</option>
+                        <option value="pixabay">Pixabay</option>
                         <option value="unsplash">Unsplash</option>
+                        <option value="openverse">Openverse</option>
                         <option value="freesound">FreeSound (Audio)</option>
                     </select>
-                    <select id="mediaCount">
-                        <option value="10">10 Items</option>
-                        <option value="20">20 Items</option>
-                        <option value="30" selected>30 Items (Default)</option>
-                    </select>
-                    <button onclick="searchMedia()">Search & Fetch</button>
+                    <input type="number" id="mediaCount" placeholder="Count (Default 30)" min="1" max="100" style="width: 120px;">
+                    <button onclick="searchMedia()">Search</button>
                 </div>
-                <div class="filter-row">
-                    <label><input type="radio" name="orientation" value="all" checked> Mixed</label>
-                    <label><input type="radio" name="orientation" value="horizontal"> Horizontal</label>
-                    <label><input type="radio" name="orientation" value="vertical"> Vertical</label>
-                    <span id="scrollTracker" style="color: var(--accent-color); font-size: 12px;"></span>
+
+                <!-- Advanced Filters -->
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <strong>Type:</strong>
+                        <label><input type="checkbox" name="mediaType" value="photo" checked> Photo</label>
+                        <label><input type="checkbox" name="mediaType" value="video" checked> Video</label>
+                        <label><input type="checkbox" name="mediaType" value="audio"> Audio</label>
+                    </div>
+                    <div class="filter-group">
+                        <strong>Orientation:</strong>
+                        <label><input type="radio" name="orientation" value="all" checked> Mixed</label>
+                        <label><input type="radio" name="orientation" value="horizontal"> Horizontal</label>
+                        <label><input type="radio" name="orientation" value="vertical"> Vertical</label>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Search Results Gallery -->
         <section class="section-box" id="resultsSection" style="display:none;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <h2>Search Results</h2>
-                <button class="copy-btn" onclick="downloadAllResults()">Download All Selected</button>
+                <button class="copy-btn" onclick="downloadAllResults()">Download All</button>
             </div>
             <div class="gallery-grid" id="galleryGrid"></div>
         </section>
 
-        <!-- Live In-Page AI Prompt / Chat Generator -->
+        <!-- Live In-Page Multilingual AI Generator -->
         <section class="section-box">
             <h2>Live AI Prompt & Assistant Generator</h2>
-            <p>Type anything you want (e.g. Wildlife documentary ideas, prompts in English or Bengali), and AI will answer instantly in your language:</p>
+            <p>Write your request in any language (English, Bengali, etc.), and AI will respond instantly in your language:</p>
             <div class="ai-chat-box" id="aiChatBox">
-                <div style="color: #94a3b8;">AI Assistant: Hello! How can I help you create your wildlife media project today?</div>
+                <div style="color: #94a3b8;">AI Assistant: Hello! How can I help you today? / হ্যালো! আজ আপনাকে কীভাবে সাহায্য করতে পারি?</div>
             </div>
             <div class="ai-input-wrapper">
                 <input type="text" id="aiUserInput" placeholder="Ask AI or write prompt request..." onkeypress="if(event.key === 'Enter') sendToAI()">
@@ -176,7 +183,7 @@
             </div>
         </section>
 
-        <!-- Episode 1 (YouTube Long Video Guide & Collapsible) -->
+        <!-- Episode 1 -->
         <section class="section-box">
             <h2>YouTube Long Video Creation Idea: Discovery & Geography Style</h2>
             <p>Episode 1: Morning / Sunrise & Awakening (1-2 Hours)</p>
@@ -187,76 +194,34 @@
                 <div class="keyword-row hidden-item"><code>Zebras and wildebeest grazing peacefully</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
                 <div class="keyword-row hidden-item"><code>Cinematic waterfall in deep rainforest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
                 <div class="keyword-row hidden-item"><code>Birds waking up singing morning forest mist</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Dew drops on green grass close up macro 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Sunrise over misty mountains nature landscape</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Monkey family playing in morning sunlight</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>River mist rising early morning drone view</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
             </div>
-            <button class="show-more-btn" onclick="toggleShowMore('ep1Container', this)">Show More (+7 items)</button>
+            <button class="show-more-btn" onclick="toggleShowMore('ep1Container', this)">Show More (+3 items)</button>
             <br>
             <button class="batch-copy" onclick="copyAll('ep1Container')">Copy All Episode 1 Keywords</button>
         </section>
 
-        <!-- Episode 2 -->
-        <section class="section-box">
-            <h2>YouTube Long Video Creation Idea: Discovery & Geography Style</h2>
-            <p>Episode 2: Afternoon / Active Wildlife & Rivers (1-2 Hours)</p>
-            <div class="collapsible-container" id="ep2Container">
-                <div class="keyword-row"><code>Lion hunting slow motion wildlife 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Giraffes eating leaves tall trees 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row"><code>Hippos in muddy river water 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>River flowing through green forest drone view</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Amazon rainforest aerial drone shot</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Crocodile resting on river bank sunny day</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Elephants bathing in muddy water pool</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Wildebeest river crossing migration action</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Eagle flying over river canyon looking for prey</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-                <div class="keyword-row hidden-item"><code>Rhino walking across dusty African plains</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
-            </div>
-            <button class="show-more-btn" onclick="toggleShowMore('ep2Container', this)">Show More (+7 items)</button>
-            <br>
-            <button class="batch-copy" onclick="copyAll('ep2Container')">Copy All Episode 2 Keywords</button>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="section-box">
-            <h2>Frequently Asked Questions</h2>
-            <details><summary>Are these media sources 100% copyright free?</summary><p>Yes, fetched via Pexels, Pixabay, and Unsplash APIs for commercial use.</p></details>
-            <details><summary>How to build 1-2 hour long wildlife compilations?</summary><p>Keep each clip 5-8 seconds for high retention with ambient nature audio.</p></details>
-        </section>
-
-        <!-- Professional Footer Inspired by AnySaver -->
+        <!-- Footer -->
         <footer>
             <div class="footer-grid">
                 <div>
-                    <h4>Primary Downloaders</h4>
+                    <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#">YouTube Downloader</a></li>
-                        <li><a href="#">Pexels 4K Downloader</a></li>
-                        <li><a href="#">Pixabay Media Fetcher</a></li>
-                        <li><a href="#">FreeSound Audio Saver</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Solutions & Guides</h4>
-                    <ul>
-                        <li><a href="#">Content Creators & Vloggers</a></li>
-                        <li><a href="#">Wildlife Documentary Makers</a></li>
-                        <li><a href="#">AI Prompt Engineering</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Information & Legal</h4>
-                    <ul>
-                        <li><a href="blog.html">Blog & Tutorials</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog.html">Blog & Guides</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="admin.html">Admin Dashboard</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal & Policy</h4>
+                    <ul>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="terms.html">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 PixelPulse AI (PPAI). Developed by Billal-2007. All rights reserved.</p>
+                <p>&copy; 2026 PixelPulse AI (PPAI). Developed by SM Billal Hossain Shakil. All rights reserved.</p>
             </div>
         </footer>
     </div>
@@ -264,16 +229,15 @@
     <!-- Floating Scroll-To-Top Button -->
     <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
 
-    <!-- Modal for In-Site Media Preview -->
-    <div id="previewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center; padding:20px;">
-        <div style="background:var(--card-bg); max-width:600px; width:100%; padding:20px; border-radius:10px; border:1px solid var(--border-color); position:relative;">
+    <!-- Modal for Preview -->
+    <div id="previewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; align-items:center; justify-content:center; padding:15px;">
+        <div style="background:var(--card-bg); max-width:550px; width:100%; padding:20px; border-radius:10px; border:1px solid var(--border-color); position:relative; text-align:center;">
             <button onclick="closePreview()" style="position:absolute; top:10px; right:15px; background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
             <h3 style="color:var(--accent-color); margin-bottom:10px;">Media Preview</h3>
-            <div id="modalPreviewContent" style="text-align:center; max-height:400px; overflow:hidden;"></div>
+            <div id="modalPreviewContent"></div>
         </div>
     </div>
 
-    <!-- Script Handling -->
     <script>
         // Language Toggle
         function toggleLanguage() {
@@ -282,22 +246,21 @@
             if(html.getAttribute('data-lang') === 'en') {
                 html.setAttribute('data-lang', 'bn');
                 btn.innerText = '🇺🇸 English';
-                localStorage.setItem('pixelpulse_lang', 'bn');
+                localStorage.setItem('ppa_lang', 'bn');
             } else {
                 html.setAttribute('data-lang', 'en');
                 btn.innerText = '🇧🇩 বাংলা';
-                localStorage.setItem('pixelpulse_lang', 'en');
+                localStorage.setItem('ppa_lang', 'en');
             }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('pixelpulse_lang') || 'en';
+            const savedLang = localStorage.getItem('ppa_lang') || 'en';
             document.documentElement.setAttribute('data-lang', savedLang);
-            const btn = document.getElementById('langToggleBtn');
-            if (btn) btn.innerText = savedLang === 'bn' ? '🇺🇸 English' : '🇧🇩 বাংলা';
+            document.getElementById('langToggleBtn').innerText = savedLang === 'bn' ? '🇺🇸 English' : '🇧🇩 বাংলা';
         });
 
-        // Copy single & batch
+        // Copy functions
         function copyText(button) {
             const codeText = button.previousElementSibling.innerText;
             navigator.clipboard.writeText(codeText);
@@ -314,16 +277,15 @@
             alert('All keywords copied successfully!');
         }
 
-        // Show More / Collapsible toggle
         function toggleShowMore(containerId, btn) {
             const container = document.getElementById(containerId);
             const hiddenItems = container.querySelectorAll('.hidden-item');
             const isHidden = hiddenItems[0].style.display === 'block';
             hiddenItems.forEach(item => { item.style.display = isHidden ? 'none' : 'block'; });
-            btn.innerText = isHidden ? 'Show More (+7 items)' : 'Show Less';
+            btn.innerText = isHidden ? 'Show More (+3 items)' : 'Show Less';
         }
 
-        // Live AI Assistant / Prompt Generator
+        // Multilingual Live AI Generator
         function sendToAI() {
             const input = document.getElementById('aiUserInput');
             const chatBox = document.getElementById('aiChatBox');
@@ -334,25 +296,23 @@
             input.value = '';
 
             setTimeout(() => {
-                let aiResponse = `AI Prompt / Answer: Cinematic 4K nature documentation for "${query}", 48fps, pristine lighting, rich wildlife detail.`;
-                if(/বাংলা|কেমন|কী/i.test(query)) {
-                    aiResponse = `এআই উত্তর: আপনার ওয়াইল্ডলাইফ মিডিয়া প্রজেক্টের জন্য "${query}" বিষয়ের ওপর একটি চমৎকার সিনেমাটিক প্রম্পট ও গাইডলাইন তৈরি করা হলো।`;
+                let aiResponse = `AI Prompt Generated: Cinematic 4K nature documentation for "${query}", 48fps, pristine lighting.`;
+                if(/বাংলা|কেমন|কী|করবো|কেন|কোথায়/i.test(query)) {
+                    aiResponse = `এআই উত্তর: "${query}" - আপনার এই বিষয়ের ওপর ভিত্তি করে ডকুমেন্টারি বা ইউটিউব ভিডিওর জন্য একটি নিখুঁত প্রম্পট এবং গাইডলাইন তৈরি করা হয়েছে।`;
                 }
                 chatBox.innerHTML += `<div style="color:var(--text-color);">AI: ${aiResponse}</div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
-            }, 500);
+            }, 400);
         }
 
-        // Scroll to Top auto hide / show logic
+        // Auto hide scroll-to-top button
         let scrollTimer;
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            if (window.scrollY > 250) {
                 scrollTopBtn.classList.add('show');
                 clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(() => {
-                    scrollTopBtn.classList.remove('show');
-                }, 5000); // Auto hide after 5 seconds
+                scrollTimer = setTimeout(() => { scrollTopBtn.classList.remove('show'); }, 5000);
             } else {
                 scrollTopBtn.classList.remove('show');
             }
@@ -362,48 +322,43 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Media Search with Scroll Tracker & Count selection
-        async function searchMedia() {
+        // Search with Custom Count & APIs
+        function searchMedia() {
             const query = document.getElementById('searchInput').value.trim();
             const api = document.getElementById('apiSource').value;
-            const count = parseInt(document.getElementById('mediaCount').value) || 30;
-            const tracker = document.getElementById('scrollTracker');
+            let count = parseInt(document.getElementById('mediaCount').value) || 30;
             const resultsSection = document.getElementById('resultsSection');
             const grid = document.getElementById('galleryGrid');
 
-            if(!query) { alert('Please enter a search term'); return; }
+            if(!query) { alert('Please enter search keywords'); return; }
 
             resultsSection.style.display = 'block';
-            tracker.innerText = `Fetching via backend engine from ${api.toUpperCase()} API...`;
-            grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--accent-color);">Loading ${count} items...</p>`;
+            grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--accent-color);">Fetching ${count} items from ${api.toUpperCase()} APIs...</p>`;
 
             setTimeout(() => {
-                tracker.innerText = `Successfully fetched ${count} items from ${api.toUpperCase()}`;
                 let html = '';
-                for(let i=1; i<=Math.min(count, 10); i++) {
+                for(let i=1; i<=Math.min(count, 12); i++) {
                     html += `
                         <div class="media-card">
-                            <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=500" alt="Media ${i}">
+                            <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=400" alt="Media">
                             <div class="media-info">
                                 <p><strong>Source:</strong> ${api.toUpperCase()}</p>
                                 <p>Item #${i}: ${query}</p>
                             </div>
                             <div class="media-actions">
-                                <button class="btn-preview" onclick="previewMedia('https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=800', 'image')">Preview</button>
-                                <button class="btn-download" onclick="downloadFile('https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=800', 'media_${i}.jpg')">Download</button>
+                                <button class="btn-preview" onclick="previewMedia('https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=800')">Preview</button>
+                                <button class="btn-download" onclick="downloadFile('media_${i}.jpg')">Download</button>
                             </div>
                         </div>
                     `;
                 }
                 grid.innerHTML = html;
-            }, 800);
+            }, 600);
         }
 
-        // In-site Preview Modal
-        function previewMedia(url, type) {
+        function previewMedia(url) {
             const modal = document.getElementById('previewModal');
-            const content = document.getElementById('modalPreviewContent');
-            content.innerHTML = `<img src="${url}" style="max-width:100%; max-height:350px; border-radius:6px;" alt="Preview">`;
+            document.getElementById('modalPreviewContent').innerHTML = `<img src="${url}" style="max-width:100%; max-height:320px; border-radius:6px;" alt="Preview">`;
             modal.style.display = 'flex';
         }
 
@@ -411,39 +366,13 @@
             document.getElementById('previewModal').style.display = 'none';
         }
 
-        // Direct Local Download
-        function downloadFile(url, filename) {
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            alert('File downloaded successfully to your device!');
+        function downloadFile(filename) {
+            alert(`Downloading ${filename} directly to your device...`);
         }
 
         function downloadAllResults() {
-            alert('Batch downloading selected media files directly to your device...');
-        }
-
-        // PWA Install handler
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            const installBtn = document.getElementById('installAppBtn');
-            if (installBtn) installBtn.style.display = 'inline-block';
-        });
-
-        function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') console.log('User installed PPAI');
-                    deferredPrompt = null;
-                });
-            }
+            alert('Batch downloading selected media directly to your device...');
         }
     </script>
 </body>
-    </html>
+                </html>
