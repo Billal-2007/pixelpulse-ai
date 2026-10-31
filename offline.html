@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline | PixelPulse AI</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --border-color: #334155;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; text-align: center; }
+        .offline-card { background: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); max-width: 450px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        h1 { font-size: 24px; color: var(--accent-color); margin-bottom: 10px; }
+        p { color: #94a3b8; font-size: 14px; margin-bottom: 25px; }
+        button { padding: 12px 25px; background: var(--accent-color); color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #0ea5e9; }
+    </style>
+</head>
+<body>
+    <div class="offline-card">
+        <h1>You are Offline</h1>
+        <p>Please check your internet connection and try again to access PixelPulse AI media downloader features.</p>
+        <button onclick="window.location.reload()">Retry Connection</button>
+    </div>
+</body>
+</html>
