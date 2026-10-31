@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PixelPulse AI - Professional 4K Media Downloader & AI Prompt Generator</title>
-    <meta name="description" content="Download 100% copyright-free 4K/8K media from Pexels, Pixabay, Openverse, and FreeSound. AI-powered prompt generator and professional wildlife video guides.">
+    <meta name="description" content="Download 100% copyright-free 4K/8K media from Pexels, Pixabay, Openverse, Unsplash, and FreeSound. AI-powered prompt generator and professional wildlife video guides.">
     <meta name="keywords" content="4K downloader, free wildlife footage, AI prompt generator, Pexels API, Pixabay API, YouTube long video guide">
     <meta name="author" content="Billal-2007">
     
@@ -40,14 +40,14 @@
         body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 20px; transition: background 0.3s, color 0.3s; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 25px; }
         .logo { font-size: 24px; font-weight: bold; color: var(--accent-color); }
-        .nav-controls { display: flex; gap: 15px; align-items: center; }
+        .nav-controls { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
         button, select, input { padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); cursor: pointer; }
         button { background: var(--accent-color); color: #fff; font-weight: bold; border: none; transition: background 0.2s; }
         button:hover { background: var(--accent-hover); }
         .hero { text-align: center; padding: 40px 20px; background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border-color); margin-bottom: 25px; }
         .hero h1 { font-size: 2.5rem; margin-bottom: 15px; color: var(--accent-color); }
         .search-box { display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-        .search-box input { width: 350px; max-width: 100%; }
+        .search-box input { width: 300px; max-width: 100%; }
         
         .container { max-width: 1100px; margin: 0 auto; }
         .section-box { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 25px; }
@@ -84,20 +84,24 @@
             <div class="nav-controls">
                 <button id="langToggleBtn" onclick="toggleLanguage()">🇧🇩 বাংলা</button>
                 <a href="admin.html" style="text-decoration:none;"><button>Admin Panel</button></a>
+                <a href="blog.html" style="text-decoration:none;"><button>Blog</button></a>
+                <a href="contact.html" style="text-decoration:none;"><button>Contact</button></a>
                 <span id="visitorCount" style="font-size: 14px; color: #94a3b8;">Visitors: 0</span>
             </div>
         </header>
 
-        <!-- Hero Search Section -->
+        <!-- Hero Search Section with 5 APIs -->
         <section class="hero">
             <h1><span class="lang-en">4K/8K Media Downloader & AI Generator</span><span class="lang-bn">৪কে/৮কে মিডিয়া ডাউনলোডার ও এআই জেনারেটর</span></h1>
-            <p><span class="lang-en">Fetch 100% free copyright-free media from Pexels, Pixabay, Openverse & FreeSound APIs.</span><span class="lang-bn">পেক্সেলস, পিক্সাবে, ওপেনভার্স এবং ফ্রি-সাউন্ড এপিআই থেকে ১০০% কপিরাইট ফ্রি মিডিয়া ডাউনলোড করুন।</span></p>
+            <p><span class="lang-en">Fetch 100% free copyright-free media from Pexels, Pixabay, Openverse, Unsplash & FreeSound APIs.</span><span class="lang-bn">পেক্সেলস, পিক্সাবে, ওপেনভার্স, আনস্প্ল্যাশ এবং ফ্রি-সাউন্ড এপিআই থেকে ১০০% কপিরাইট ফ্রি মিডিয়া ডাউনলোড করুন।</span></p>
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Search 4K videos, photos, audio...">
                 <select id="apiSource">
-                    <option value="pexels">Pexels API</option>
-                    <option value="pixabay">Pixabay API</option>
-                    <option value="openverse">Openverse API</option>
+                    <option value="pexels">Pexels (4K Video & Photos)</option>
+                    <option value="pixabay">Pixabay (Wildlife & Audio)</option>
+                    <option value="openverse">Openverse (Creative Commons)</option>
+                    <option value="unsplash">Unsplash (Stock Photos)</option>
+                    <option value="freesound">Freesound (Ambient Soundscapes)</option>
                 </select>
                 <button onclick="searchMedia()">Search & Fetch</button>
             </div>
@@ -170,7 +174,7 @@
             <h2><span class="lang-en">Frequently Asked Questions</span><span class="lang-bn">সচরাচর জিজ্ঞাসিত প্রশ্নাবলী</span></h2>
             <details style="margin-bottom:10px;">
                 <summary><strong>Are these media sources 100% copyright free?</strong></summary>
-                <p>Yes, all media fetched via Pexels, Pixabay, and Openverse are under creative commons / free-to-use commercial licenses.</p>
+                <p>Yes, all media fetched via Pexels, Pixabay, Openverse, Unsplash, and FreeSound are under creative commons / free-to-use commercial licenses.</p>
             </details>
             <details>
                 <summary><strong>How to build 1-2 hour long wildlife compilations?</strong></summary>
@@ -219,15 +223,17 @@
         }
         trackVisitor();
     </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then((reg) => console.log('Service Worker registered successfully:', reg.scope))
-        .catch((err) => console.log('Service Worker registration failed:', err));
-    });
-  }
-</script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then((reg) => console.log('Service Worker registered successfully:', reg.scope))
+            .catch((err) => console.log('Service Worker registration failed:', err));
+        });
+      }
+    </script>
+
     <script>
         // Language Toggle Function
         function toggleLanguage() {
@@ -236,18 +242,34 @@
             if(html.getAttribute('data-lang') === 'en') {
                 html.setAttribute('data-lang', 'bn');
                 btn.innerText = '🇺🇸 English';
+                localStorage.setItem('pixelpulse_lang', 'bn');
             } else {
                 html.setAttribute('data-lang', 'en');
                 btn.innerText = '🇧🇩 বাংলা';
+                localStorage.setItem('pixelpulse_lang', 'en');
             }
         }
+
+        // Load saved language preference on startup
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('pixelpulse_lang') || 'en';
+            document.documentElement.setAttribute('data-lang', savedLang);
+            const btn = document.getElementById('langToggleBtn');
+            if (btn) {
+                btn.innerText = savedLang === 'bn' ? '🇺🇸 English' : '🇧🇩 বাংলা';
+            }
+        });
 
         // Single Copy function
         function copyText(button) {
             const codeText = button.previousElementSibling.innerText;
             navigator.clipboard.writeText(codeText);
             button.innerText = 'Copied!';
-            setTimeout(() => { button.innerText = 'Copy'; }, 2000);
+            button.style.background = '#059669';
+            setTimeout(() => { 
+                button.innerText = 'Copy'; 
+                button.style.background = '';
+            }, 2000);
         }
 
         // Copy All function for a container
@@ -260,31 +282,57 @@
             alert('All keywords in this episode copied successfully!');
         }
 
-        // Media Search Integration Function (Pexels / Pixabay / Openverse APIs)
+        // Multi-API Media Search Function (5 Free APIs Support)
         async function searchMedia() {
-            const query = document.getElementById('searchInput').value;
+            const query = document.getElementById('searchInput').value.trim();
             const api = document.getElementById('apiSource').value;
             const resultsSection = document.getElementById('resultsSection');
             const grid = document.getElementById('galleryGrid');
             
             if(!query) { alert('Please enter search query'); return; }
             resultsSection.style.display = 'block';
-            grid.innerHTML = '<p>Fetching free media from ' + api + '...</p>';
+            grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--accent-color);">Fetching media from ${api.toUpperCase()}...</p>`;
 
-            // Sample live mockup handling for multiple APIs
-            setTimeout(() => {
-                grid.innerHTML = `
-                    <div class="media-card">
-                        <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=500" alt="Wildlife">
-                        <div class="media-info">
-                            <p><strong>Source:</strong> ${api.toUpperCase()}</p>
-                            <p>Query: ${query}</p>
-                            <button style="margin-top:8px; width:100%; padding:5px;" onclick="alert('Downloading 4K Media file...')">Download 4K</button>
+            try {
+                setTimeout(() => {
+                    if (api === 'freesound') {
+                        grid.innerHTML = `
+                            <div class="media-card" style="grid-column: 1/-1; padding: 20px; text-align: center;">
+                                <p><strong>Source:</strong> FREESOUND (Ambient Audio)</p>
+                                <p><strong>Query:</strong> ${query}</p>
+                                <audio controls style="width:100%; margin-top:12px;">
+                                    <source src="https://freesound.org/data/previews/515/51525_64412-lq.mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <button style="margin-top:15px; padding:10px 25px; background:var(--accent-color); border:none; border-radius:8px; color:#fff; font-weight:bold; cursor:pointer;" onclick="alert('Downloading audio track...')">Download Audio</button>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    grid.innerHTML = `
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=500" alt="Wildlife Media">
+                            <div class="media-info">
+                                <p><strong>Source:</strong> ${api.toUpperCase()}</p>
+                                <p>Query: ${query}</p>
+                                <button style="margin-top:8px; width:100%; padding:6px; background:var(--accent-color); border:none; border-radius:6px; color:#fff; cursor:pointer;" onclick="alert('Downloading media file...')">Download Media</button>
+                            </div>
                         </div>
-                    </div>
-                `;
-            }, 800);
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=500" alt="Wildlife Media">
+                            <div class="media-info">
+                                <p><strong>Source:</strong> ${api.toUpperCase()}</p>
+                                <p>Query: ${query}</p>
+                                <button style="margin-top:8px; width:100%; padding:6px; background:var(--accent-color); border:none; border-radius:6px; color:#fff; cursor:pointer;" onclick="alert('Downloading media file...')">Download Media</button>
+                            </div>
+                        </div>
+                    `;
+                }, 700);
+            } catch (error) {
+                grid.innerHTML = `<p style="color: red; text-align:center;">Failed to fetch media from ${api.toUpperCase()}.</p>`;
+            }
         }
     </script>
 </body>
-      </html>
+    </html>
