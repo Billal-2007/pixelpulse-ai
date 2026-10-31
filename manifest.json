@@ -1,0 +1,15 @@
+{
+  "name": "PixelPulse AI Downloader",
+  "short_name": "PixelPulse",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#38bdf8",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3342/3342137.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
