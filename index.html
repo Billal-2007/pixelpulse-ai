@@ -1,1 +1,354 @@
 
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelPulse AI - Professional 4K Media Downloader & AI Prompt Generator</title>
+    <meta name="description" content="Download 100% copyright-free 4K/8K media and generate cinematic AI prompts for professional wildlife documentaries.">
+    
+    <!-- PWA Manifest & Meta -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131d31;
+            --text-color: #f1f5f9;
+            --accent-color: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --border-color: #1e293b;
+            --btn-copy: #10b981;
+            --btn-copy-hover: #059669;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 15px; }
+        
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        /* Header & Navbar */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .logo { font-size: 20px; font-weight: bold; color: var(--accent-color); display: flex; align-items: center; gap: 6px; }
+        .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        
+        .nav-links a, .nav-links button { text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color); cursor: pointer; transition: 0.2s; }
+        .nav-links button:hover, .nav-links a:hover { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
+
+        /* Hero Section */
+        .hero { text-align: center; padding: 35px 15px; background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .hero h1 { font-size: 1.8rem; margin-bottom: 10px; color: var(--accent-color); }
+        .hero p { font-size: 14px; color: #94a3b8; margin-bottom: 20px; }
+        
+        /* Search Box */
+        .search-wrapper { display: flex; gap: 8px; max-width: 750px; margin: 0 auto; flex-wrap: wrap; }
+        .search-wrapper input { flex: 1; min-width: 180px; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 14px; }
+        .search-wrapper select { padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 14px; }
+        .search-wrapper button { padding: 12px 18px; background: var(--accent-color); color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+        .search-wrapper button:hover { background: var(--accent-hover); }
+
+        /* Sections */
+        .section-box { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .section-box h2 { color: var(--accent-color); font-size: 1.3rem; margin-bottom: 8px; }
+        .section-box p { font-size: 13px; color: #94a3b8; margin-bottom: 15px; }
+
+        /* Keyword Rows */
+        .keyword-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; border: 1px solid var(--border-color); gap: 10px; }
+        .keyword-row code { font-family: monospace; font-size: 13px; word-break: break-all; }
+        .copy-btn { background: var(--btn-copy); padding: 6px 12px; font-size: 12px; border-radius: 4px; color: #fff; border: none; cursor: pointer; white-space: nowrap; }
+        .copy-btn:hover { background: var(--btn-copy-hover); }
+        .batch-copy { margin-top: 12px; background: #6366f1; padding: 10px 16px; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 13px; }
+        .batch-copy:hover { background: #4f46e5; }
+
+        /* Gallery Grid */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 15px; }
+        .media-card { background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
+        .media-card img { width: 100%; height: 140px; object-fit: cover; }
+        .media-info { padding: 10px; font-size: 12px; }
+
+        /* FAQ details */
+        details { background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 8px; cursor: pointer; }
+        summary { font-weight: 600; font-size: 14px; color: var(--text-color); }
+        details p { margin-top: 8px; font-size: 13px; color: #94a3b8; }
+
+        footer { text-align: center; padding: 20px; color: #64748b; font-size: 13px; }
+
+        /* Language Support Classes */
+        .lang-bn { display: none; }
+        [data-lang="bn"] .lang-en { display: none; }
+        [data-lang="bn"] .lang-bn { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header & Navbar -->
+        <header>
+            <div class="logo">PixelPulse AI 🚀</div>
+            <div class="nav-links">
+                <button id="langToggleBtn" onclick="toggleLanguage()">🇧🇩 বাংলা</button>
+                <button id="installAppBtn" style="display:none; background:#10b981;" onclick="installApp()">📥 Install App</button>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+                <span id="visitorCount" style="font-size: 12px; color: #94a3b8; padding: 4px;">Visitors: 1</span>
+            </div>
+        </header>
+
+        <!-- Hero & Multi-API Search -->
+        <section class="hero">
+            <h1><span class="lang-en">4K/8K Wildlife Media & AI Generator</span><span class="lang-bn">৪কে/৮কে ওয়াইল্ডলাইফ মিডিয়া ও এআই জেনারেটর</span></h1>
+            <p><span class="lang-en">Instant access to Pexels, Pixabay, Openverse, Unsplash & FreeSound APIs.</span><span class="lang-bn">পেক্সেলস, পিক্সাবে, ওপেনভার্স, আনস্প্ল্যাশ এবং ফ্রি-সাউন্ড এপিআই থেকে মিডিয়া খুঁজুন।</span></p>
+            
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Search 4K wildlife clips, photos...">
+                <select id="apiSource">
+                    <option value="pexels">Pexels</option>
+                    <option value="pixabay">Pixabay</option>
+                    <option value="openverse">Openverse</option>
+                    <option value="unsplash">Unsplash</option>
+                    <option value="freesound">FreeSound (Audio)</option>
+                </select>
+                <button onclick="searchMedia()">Search</button>
+            </div>
+        </section>
+
+        <!-- Media Results Gallery -->
+        <section class="section-box" id="resultsSection" style="display:none;">
+            <h2>Search Results</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- AI Prompt Generator Section with Dropdowns -->
+        <section class="section-box">
+            <h2>AI Cinematic Prompt Generator</h2>
+            <p>Select subjects and styles from dropdowns to build professional documentary prompts:</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+                <select id="promptSubject" style="flex: 1; min-width: 220px; padding: 10px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 6px;">
+                    <option value="Elephant herd walking African savanna">Elephant Herd (Savanna)</option>
+                    <option value="Tiger walking through deep jungle slow motion">Tiger in Deep Jungle</option>
+                    <option value="Cheetah running fast wildlife action">Cheetah Speed Action</option>
+                    <option value="Zebras and wildebeest grazing peacefully">Zebras Grazing</option>
+                    <option value="Cinematic waterfall in deep rainforest">Rainforest Waterfall</option>
+                    <option value="Lion hunting slow motion wildlife">Lion Hunting</option>
+                    <option value="Giraffes eating leaves tall trees">Giraffes Eating</option>
+                    <option value="Hippos in muddy river water">Hippos in River</option>
+                    <option value="Golden hour African savanna sunset silhouette">Savanna Sunset Silhouette</option>
+                    <option value="Full moon over dark forest cinematic">Full Moon Forest</option>
+                </select>
+                <select id="promptStyle" style="flex: 1; min-width: 220px; padding: 10px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 6px;">
+                    <option value="Cinematic 4K, slow motion, professional lighting">Cinematic 4K (Slow Motion)</option>
+                    <option value="8K resolution, Unreal Engine 5 render, hyper-realistic">8K Hyper-Realistic</option>
+                    <option value="National Geographic documentary style, natural ambient look">National Geographic Style</option>
+                    <option value="Drone aerial shot, majestic wide angle view">Aerial Drone View</option>
+                </select>
+                <button onclick="generatePrompt()" style="padding: 10px 18px; background: var(--accent-color); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer;">Generate</button>
+            </div>
+            <div id="promptOutput" style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); font-family: monospace; font-size: 13px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                <span id="promptText" style="color: #94a3b8; word-break: break-all;">Your prompt will appear here...</span>
+                <button class="copy-btn" onclick="copyPromptText()">Copy</button>
+            </div>
+        </section>
+
+        <!-- Episode 1 (10 Keywords) -->
+        <section class="section-box">
+            <h2>Episode 1: Morning / Sunrise & Awakening (1-2 Hours)</h2>
+            <p>Features mist, soft lighting, dew, and awakening nature.</p>
+            <div id="ep1Keywords">
+                <div class="keyword-row"><code>Elephant herd walking African savanna 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Tiger walking through deep jungle slow motion</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Cheetah running fast wildlife action 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Zebras and wildebeest grazing peacefully</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Cinematic waterfall in deep rainforest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Birds waking up singing morning forest mist</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Dew drops on green grass close up macro 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Sunrise over misty mountains nature landscape</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Monkey family playing in morning sunlight</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>River mist rising early morning drone view</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+            </div>
+            <button class="batch-copy" onclick="copyAll('ep1Keywords')">Copy All Episode 1 Keywords</button>
+        </section>
+
+        <!-- Episode 2 (10 Keywords) -->
+        <section class="section-box">
+            <h2>Episode 2: Afternoon / Active Wildlife & Rivers (1-2 Hours)</h2>
+            <p>Intense sunlight, animal migration, rivers, and waterfalls.</p>
+            <div id="ep2Keywords">
+                <div class="keyword-row"><code>Lion hunting slow motion wildlife 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Giraffes eating leaves tall trees 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Hippos in muddy river water 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>River flowing through green forest drone view</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Amazon rainforest aerial drone shot</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Crocodile resting on river bank sunny day</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Elephants bathing in muddy water pool</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Wildebeest river crossing migration action</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Eagle flying over river canyon looking for prey</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Rhino walking across dusty African plains</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+            </div>
+            <button class="batch-copy" onclick="copyAll('ep2Keywords')">Copy All Episode 2 Keywords</button>
+        </section>
+
+        <!-- Episode 3 (10 Keywords) -->
+        <section class="section-box">
+            <h2>Episode 3: Evening / Golden Hour & Sunset (1-2 Hours)</h2>
+            <p>Golden hour tones, sunset silhouettes, and resting animals.</p>
+            <div id="ep3Keywords">
+                <div class="keyword-row"><code>Golden hour African savanna sunset silhouette</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Giraffes walking against sunset sky 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Sun setting behind mountain forest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Birds flying back to nest sunset 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Lion silhouette sunset 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Elephant family walking into orange sunset</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Acacia tree silhouette African golden hour</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Wolves howling during orange dusk horizon</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>River reflecting orange sunset light calm waves</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Deer standing on hill edge during twilight</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+            </div>
+            <button class="batch-copy" onclick="copyAll('ep3Keywords')">Copy All Episode 3 Keywords</button>
+        </section>
+
+        <!-- Episode 4 (10 Keywords) -->
+        <section class="section-box">
+            <h2>Episode 4: Night / Nocturnal & Mysterious (1-2 Hours)</h2>
+            <p>Dark jungle, starry sky, full moon, and nocturnal wildlife.</p>
+            <div id="ep4Keywords">
+                <div class="keyword-row"><code>Full moon over dark forest cinematic 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Starry night sky over mountains timelapse 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Milky way galaxy over forest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Owl sitting on tree branch night vision look</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Fireflies glowing in forest night 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Leopard resting on tree branch night glow</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Wolf pack howling under bright moonlight</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Dark jungle insects glowing bioluminescence</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Bat flying across starry night sky silhouette</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Nocturnal owl hunting in moonlight woods</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+            </div>
+            <button class="batch-copy" onclick="copyAll('ep4Keywords')">Copy All Episode 4 Keywords</button>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section-box">
+            <h2>Frequently Asked Questions</h2>
+            <details>
+                <summary>Are these media sources 100% copyright free?</summary>
+                <p>Yes, all media fetched via Pexels, Pixabay, Unsplash, and Openverse are safe for commercial use.</p>
+            </details>
+            <details>
+                <summary>How to build 1-2 hour long wildlife compilations?</summary>
+                <p>Keep each clip between 5-8 seconds to maintain high viewer retention, paired with ambient nature audio.</p>
+            </details>
+            <details>
+                <summary>How to access the Admin Panel?</summary>
+                <p>You can securely access the dashboard by visiting <code>admin.html</code> directly in your browser URL.</p>
+            </details>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 PixelPulse AI. Developed by Billal-2007. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Script Handling -->
+    <script>
+        // Language Toggle Function
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const btn = document.getElementById('langToggleBtn');
+            if(html.getAttribute('data-lang') === 'en') {
+                html.setAttribute('data-lang', 'bn');
+                btn.innerText = '🇺🇸 English';
+                localStorage.setItem('pixelpulse_lang', 'bn');
+            } else {
+                html.setAttribute('data-lang', 'en');
+                btn.innerText = '🇧🇩 বাংলা';
+                localStorage.setItem('pixelpulse_lang', 'en');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('pixelpulse_lang') || 'en';
+            document.documentElement.setAttribute('data-lang', savedLang);
+            const btn = document.getElementById('langToggleBtn');
+            if (btn) btn.innerText = savedLang === 'bn' ? '🇺🇸 English' : '🇧🇩 বাংলা';
+        });
+
+        // Copy Single Keyword
+        function copyText(button) {
+            const codeText = button.previousElementSibling.innerText;
+            navigator.clipboard.writeText(codeText);
+            button.innerText = 'Copied!';
+            setTimeout(() => { button.innerText = 'Copy'; }, 2000);
+        }
+
+        // Batch Copy Keywords
+        function copyAll(containerId) {
+            const container = document.getElementById(containerId);
+            const codes = container.querySelectorAll('code');
+            let allText = '';
+            codes.forEach(c => { allText += c.innerText + '\n'; });
+            navigator.clipboard.writeText(allText);
+            alert('All keywords in this episode copied successfully!');
+        }
+
+        // AI Prompt Generator from Dropdowns
+        function generatePrompt() {
+            const sub = document.getElementById('promptSubject').value;
+            const sty = document.getElementById('promptStyle').value;
+            const res = `${sub}, ${sty}, 48fps, pristine nature documentation.`;
+            document.getElementById('promptText').innerText = res;
+            document.getElementById('promptText').style.color = 'var(--text-color)';
+        }
+
+        function copyPromptText() {
+            const txt = document.getElementById('promptText').innerText;
+            navigator.clipboard.writeText(txt);
+            alert('Prompt copied!');
+        }
+
+        // Media Search Simulation
+        async function searchMedia() {
+            const query = document.getElementById('searchInput').value.trim();
+            const api = document.getElementById('apiSource').value;
+            const resultsSection = document.getElementById('resultsSection');
+            const grid = document.getElementById('galleryGrid');
+            
+            if(!query) { alert('Please enter a search term'); return; }
+            resultsSection.style.display = 'block';
+            grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--accent-color);">Searching ${api.toUpperCase()}...</p>`;
+
+            setTimeout(() => {
+                grid.innerHTML = `
+                    <div class="media-card">
+                        <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=500" alt="Media">
+                        <div class="media-info">
+                            <p><strong>Source:</strong> ${api.toUpperCase()}</p>
+                            <p>Query: ${query}</p>
+                            <button style="margin-top:6px; width:100%; padding:5px; background:var(--accent-color); border:none; border-radius:4px; color:#fff; cursor:pointer;" onclick="alert('Downloading 4K file...')">Download</button>
+                        </div>
+                    </div>
+                `;
+            }, 600);
+        }
+
+        // PWA App Install Prompt Handler
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const installBtn = document.getElementById('installAppBtn');
+            if (installBtn) installBtn.style.display = 'inline-block';
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+    </script>
+</body>
+                                                                                                 </html>
