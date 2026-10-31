@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://billal-2007.github.io/pixelpulse-ai/sitemap.xml
