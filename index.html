@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -40,7 +40,6 @@
         .header-right { display: flex; align-items: center; gap: 8px; }
         .install-btn { background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; display: none; white-space: nowrap; }
         
-        /* Hamburger & Dropdown Menu */
         .menu-toggle { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-color); padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 16px; }
         .nav-dropdown { display: none; position: absolute; top: 55px; right: 10px; background: var(--card-bg); border: 1px solid var(--border-color); flex-direction: column; width: 170px; padding: 8px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); z-index: 1001; gap: 6px; }
         .nav-dropdown.active { display: flex; }
@@ -76,6 +75,15 @@
         .ai-input-wrapper input { flex: 1; padding: 9px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 12px; }
         .ai-input-wrapper button { padding: 9px 14px; background: var(--btn-copy); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 12px; }
 
+        /* Keyword Rows & Articles */
+        .keyword-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 7px 10px; border-radius: 6px; margin-bottom: 5px; border: 1px solid var(--border-color); gap: 8px; }
+        .keyword-row code { font-family: monospace; font-size: 11px; word-break: break-all; }
+        .copy-btn { background: var(--btn-copy); padding: 4px 8px; font-size: 10px; border-radius: 4px; color: #fff; border: none; cursor: pointer; white-space: nowrap; }
+        .batch-copy { margin-top: 8px; background: #6366f1; padding: 7px 12px; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 11px; }
+
+        .collapsible-container .hidden-item { display: none; }
+        .show-more-btn { background: none; border: none; color: var(--accent-color); font-size: 11px; font-weight: bold; cursor: pointer; margin-top: 5px; }
+
         /* Gallery Grid */
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-top: 10px; }
         .media-card { background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; }
@@ -86,7 +94,14 @@
         .btn-preview { background: #6366f1; }
         .btn-download { background: var(--accent-color); }
 
-        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 15px; border-radius: 12px; margin-top: 20px; text-align: center; color: #64748b; font-size: 10px; }
+        /* Footer */
+        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 20px 12px; border-radius: 12px; margin-top: 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 12px; font-size: 11px; }
+        .footer-grid h4 { color: var(--accent-color); margin-bottom: 6px; font-size: 12px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid ul li { margin-bottom: 4px; }
+        .footer-grid ul li a { color: #94a3b8; text-decoration: none; }
+        .footer-bottom { text-align: center; border-top: 1px solid var(--border-color); padding-top: 10px; color: #64748b; font-size: 10px; }
     </style>
 </head>
 <body>
@@ -104,10 +119,9 @@
                 <button class="menu-toggle" onclick="toggleMenu()">☰</button>
                 <div class="nav-dropdown" id="navDropdown">
                     <button onclick="location.href='index.html'">🏠 Home</button>
-                    <button id="langToggleBtn" onclick="toggleLanguage()">🇧🇩 বাংলা</button>
-                    <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="admin.html">Admin</a>
+                    <a href="blog.html">Blog & Guides</a>
+                    <a href="contact.html">Contact Us</a>
+                    <a href="admin.html">Admin Panel</a>
                     <span style="font-size: 10px; color: #94a3b8; padding: 4px;">Visitors: 1</span>
                 </div>
             </div>
@@ -135,7 +149,7 @@
                         <option value="openverse">Openverse API (Creative Commons)</option>
                         <option value="freesound">FreeSound API (Ambient Audio)</option>
                     </select>
-                    <input type="number" id="customCount" placeholder="Count (20)" min="1" max="100" style="width: 90px;">
+                    <input type="number" id="customCount" placeholder="Count (20)" min="1" max="100" style="width: 85px;">
                     <button onclick="searchMedia()">Search & Fetch</button>
                 </div>
 
@@ -160,17 +174,70 @@
             <h2>Live AI Prompt & Assistant Generator (Gemini Powered)</h2>
             <p>Type in any language, and AI will respond instantly in the exact same language:</p>
             <div class="ai-chat-box" id="aiChatBox">
-                <div style="color: #94a3b8;">AI Assistant: Hello! How can I help you today? / আপনাকে কীভাবে সাহায্য করতে পারি?</div>
+                <div style="color: #94a3b8;">AI Assistant: Hello! How can I help you today?</div>
             </div>
             <div class="ai-input-wrapper">
-                <input type="text" id="aiUserInput" placeholder="Ask AI in your language..." onkeypress="if(event.key === 'Enter') sendToGeminiAI()">
+                <input type="text" id="aiUserInput" placeholder="Ask AI prompt or assistant..." onkeypress="if(event.key === 'Enter') sendToGeminiAI()">
                 <button onclick="sendToGeminiAI()">Generate</button>
             </div>
         </section>
 
-        <!-- Footer -->
+        <!-- Episode 1 Ideas -->
+        <section class="section-box">
+            <h2>YouTube Long Video Creation Idea: Discovery & Geography Style</h2>
+            <p>Episode 1: Morning / Sunrise & Awakening (1-2 Hours)</p>
+            <div class="collapsible-container" id="ep1Container">
+                <div class="keyword-row"><code>Elephant herd walking African savanna 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Tiger walking through deep jungle slow motion</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row"><code>Cheetah running fast wildlife action 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Zebras and wildebeest grazing peacefully</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+                <div class="keyword-row hidden-item"><code>Cinematic waterfall in deep rainforest 4K</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+            </div>
+            <button class="show-more-btn" onclick="toggleShowMore('ep1Container', this)">Show More (+2 items)</button>
+            <br>
+            <button class="batch-copy" onclick="copyAll('ep1Container')">Copy All Episode 1 Keywords</button>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section-box">
+            <h2>Frequently Asked Questions</h2>
+            <details><summary>Are these media sources 100% copyright free?</summary><p>Yes, fetched via Pexels, Pixabay, Unsplash, Openverse and FreeSound APIs.</p></details>
+            <details><summary>How to build 1-2 hour long wildlife compilations?</summary><p>Keep each clip 5-8 seconds for high retention with ambient nature audio.</p></details>
+        </section>
+
+        <!-- Professional Footer -->
         <footer>
-            <p>&copy; 2026 PixelPulse AI (PPAI). Developed by SM Billal Hossain Shakil. All rights reserved.</p>
+            <div class="footer-grid">
+                <div>
+                    <h4>Media Sources</h4>
+                    <ul>
+                        <li><a href="#">Pexels API 4K</a></li>
+                        <li><a href="#">Pixabay Media Fetcher</a></li>
+                        <li><a href="#">Unsplash Photos</a></li>
+                        <li><a href="#">FreeSound Audio Saver</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Solutions & Guides</h4>
+                    <ul>
+                        <li><a href="#">Content Creators & Vloggers</a></li>
+                        <li><a href="#">Wildlife Documentary Makers</a></li>
+                        <li><a href="#">AI Prompt Engineering</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Information & Legal</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog & Tutorials</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PixelPulse AI (PPAI). Developed by SM Billal Hossain Shakil. All rights reserved.</p>
+            </div>
         </footer>
     </div>
 
@@ -184,25 +251,34 @@
     </div>
 
     <script>
-        // Dropdown Menu Toggle
         function toggleMenu() {
             document.getElementById('navDropdown').classList.toggle('active');
         }
 
-        // Language Toggle
-        function toggleLanguage() {
-            const html = document.documentElement;
-            const btn = document.getElementById('langToggleBtn');
-            if(html.getAttribute('data-lang') === 'en') {
-                html.setAttribute('data-lang', 'bn');
-                btn.innerText = '🇺🇸 English';
-            } else {
-                html.setAttribute('data-lang', 'en');
-                btn.innerText = '🇧🇩 বাংলা';
-            }
+        function copyText(button) {
+            const codeText = button.previousElementSibling.innerText;
+            navigator.clipboard.writeText(codeText);
+            button.innerText = 'Copied!';
+            setTimeout(() => { button.innerText = 'Copy'; }, 2000);
         }
 
-        // Gemini AI Integration using backend.js
+        function copyAll(containerId) {
+            const container = document.getElementById(containerId);
+            const codes = container.querySelectorAll('code');
+            let allText = '';
+            codes.forEach(c => { allText += c.innerText + '\n'; });
+            navigator.clipboard.writeText(allText);
+            alert('All keywords copied successfully!');
+        }
+
+        function toggleShowMore(containerId, btn) {
+            const container = document.getElementById(containerId);
+            const hiddenItems = container.querySelectorAll('.hidden-item');
+            const isHidden = hiddenItems[0].style.display === 'block';
+            hiddenItems.forEach(item => { item.style.display = isHidden ? 'none' : 'block'; });
+            btn.innerText = isHidden ? 'Show More (+2 items)' : 'Show Less';
+        }
+
         async function sendToGeminiAI() {
             const input = document.getElementById('aiUserInput');
             const chatBox = document.getElementById('aiChatBox');
@@ -221,7 +297,6 @@
             }
         }
 
-        // Real Media Search & Fetching using backend.js
         async function searchMedia() {
             const query = document.getElementById('searchInput').value.trim();
             const api = document.getElementById('apiSource').value;
@@ -292,7 +367,6 @@
             document.body.removeChild(a);
         }
 
-        // PWA Install prompt with PPAI branding
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
