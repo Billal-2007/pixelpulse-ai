@@ -14,6 +14,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="firebase-config.js"></script>
+    <script src="backend.js"></script>
 
     <style>
         :root {
@@ -26,78 +27,72 @@
             --btn-copy: #10b981;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 10px; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.5; padding: 8px; }
         
         .container { max-width: 1100px; margin: 0 auto; width: 100%; }
         
         /* Navbar & Header Fixed Layout */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
         .logo-area { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-color); }
-        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #38bdf8, #2563eb); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 15px; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3); }
-        .logo-text { font-size: 16px; font-weight: bold; color: var(--accent-color); }
+        .logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg, #38bdf8, #2563eb); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 14px; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3); }
+        .logo-text { font-size: 15px; font-weight: bold; color: var(--accent-color); white-space: nowrap; }
         
         .header-right { display: flex; align-items: center; gap: 8px; }
-        .install-btn { background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; display: none; }
+        .install-btn { background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; display: none; white-space: nowrap; }
         
-        /* Hamburger & Dropdown Menu for Mobile */
-        .menu-toggle { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-color); padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 16px; display: none; }
-        .nav-links { display: flex; gap: 6px; align-items: center; }
-        .nav-links a, .nav-links button { text-decoration: none; padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color); cursor: pointer; transition: 0.2s; }
-        .nav-links button:hover, .nav-links a:hover { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
+        /* Hamburger & Dropdown Menu */
+        .menu-toggle { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-color); padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 16px; }
+        .nav-dropdown { display: none; position: absolute; top: 55px; right: 10px; background: var(--card-bg); border: 1px solid var(--border-color); flex-direction: column; width: 170px; padding: 8px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); z-index: 1001; gap: 6px; }
+        .nav-dropdown.active { display: flex; }
+        .nav-dropdown a, .nav-dropdown button { text-decoration: none; padding: 8px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color); cursor: pointer; text-align: left; width: 100%; transition: 0.2s; }
+        .nav-dropdown button:hover, .nav-dropdown a:hover { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
 
-        @media(max-width: 768px) {
-            .menu-toggle { display: block; }
-            .nav-links { display: none; position: absolute; top: 60px; right: 15px; background: var(--card-bg); border: 1px solid var(--border-color); flex-direction: column; width: 160px; padding: 10px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); z-index: 1001; }
-            .nav-links.active { display: flex; }
-            .nav-links a, .nav-links button { width: 100%; text-align: left; }
-        }
-
-        /* Red News Ticker Below Navbar */
-        .news-ticker { background: #ef4444; color: #fff; padding: 8px 12px; border-radius: 8px; margin: 10px 0; font-size: 12px; font-weight: bold; overflow: hidden; white-space: nowrap; border: 1px solid #dc2626; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3); }
+        /* Red News Ticker */
+        .news-ticker { background: #ef4444; color: #fff; padding: 7px 10px; border-radius: 8px; margin: 8px 0; font-size: 11px; font-weight: bold; overflow: hidden; white-space: nowrap; border: 1px solid #dc2626; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3); }
         .ticker-content { display: inline-block; animation: ticker 22s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         /* Hero Section */
-        .hero { text-align: center; padding: 25px 12px; background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border-color); margin-bottom: 15px; }
-        .hero h1 { font-size: 1.4rem; margin-bottom: 6px; color: var(--accent-color); }
-        .hero p { font-size: 12px; color: #94a3b8; margin-bottom: 15px; }
+        .hero { text-align: center; padding: 20px 10px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 12px; }
+        .hero h1 { font-size: 1.25rem; margin-bottom: 6px; color: var(--accent-color); }
+        .hero p { font-size: 11px; color: #94a3b8; margin-bottom: 12px; }
         
-        .search-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
-        .search-wrapper { display: flex; gap: 8px; flex-wrap: wrap; }
-        .search-wrapper input { flex: 1; min-width: 180px; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 13px; }
-        .search-wrapper select { padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 13px; }
-        .search-wrapper button { padding: 10px 18px; background: var(--accent-color); color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; }
+        .search-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+        .search-wrapper { display: flex; gap: 6px; flex-wrap: wrap; }
+        .search-wrapper input { flex: 1; min-width: 160px; padding: 9px 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 12px; }
+        .search-wrapper select { padding: 9px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 12px; }
+        .search-wrapper button { padding: 9px 16px; background: var(--accent-color); color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; }
 
-        .filter-row { display: flex; gap: 10px; justify-content: center; font-size: 12px; color: #94a3b8; flex-wrap: wrap; align-items: center; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .filter-row { display: flex; gap: 8px; justify-content: center; font-size: 11px; color: #94a3b8; flex-wrap: wrap; align-items: center; background: rgba(0,0,0,0.2); padding: 6px; border-radius: 8px; border: 1px solid var(--border-color); }
         .filter-row label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
 
-        .section-box { background: var(--card-bg); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 15px; }
-        .section-box h2 { color: var(--accent-color); font-size: 1.2rem; margin-bottom: 6px; }
-        .section-box p { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
+        .section-box { background: var(--card-bg); padding: 14px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 12px; }
+        .section-box h2 { color: var(--accent-color); font-size: 1.1rem; margin-bottom: 6px; }
+        .section-box p { font-size: 11px; color: #94a3b8; margin-bottom: 10px; }
 
         /* AI Assistant */
-        .ai-chat-box { background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; min-height: 100px; max-height: 220px; overflow-y: auto; margin-bottom: 10px; font-size: 13px; display: flex; flex-direction: column; gap: 8px; }
-        .ai-input-wrapper { display: flex; gap: 8px; }
-        .ai-input-wrapper input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 13px; }
-        .ai-input-wrapper button { padding: 10px 16px; background: var(--btn-copy); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 13px; }
+        .ai-chat-box { background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; min-height: 90px; max-height: 200px; overflow-y: auto; margin-bottom: 8px; font-size: 12px; display: flex; flex-direction: column; gap: 6px; }
+        .ai-input-wrapper { display: flex; gap: 6px; }
+        .ai-input-wrapper input { flex: 1; padding: 9px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-size: 12px; }
+        .ai-input-wrapper button { padding: 9px 14px; background: var(--btn-copy); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 12px; }
 
         /* Gallery Grid */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 12px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-top: 10px; }
         .media-card { background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; }
-        .media-card img, .media-card video { width: 100%; height: 130px; object-fit: cover; }
-        .media-info { padding: 8px; font-size: 11px; }
-        .media-actions { display: flex; gap: 5px; padding: 8px; border-top: 1px solid var(--border-color); }
-        .media-actions button { flex: 1; padding: 6px; border: none; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; color: #fff; }
+        .media-card img, .media-card video { width: 100%; height: 120px; object-fit: cover; }
+        .media-info { padding: 6px; font-size: 10px; }
+        .media-actions { display: flex; gap: 4px; padding: 6px; border-top: 1px solid var(--border-color); }
+        .media-actions button { flex: 1; padding: 5px; border: none; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer; color: #fff; }
         .btn-preview { background: #6366f1; }
         .btn-download { background: var(--accent-color); }
 
-        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-top: 25px; text-align: center; color: #64748b; font-size: 11px; }
+        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 15px; border-radius: 12px; margin-top: 20px; text-align: center; color: #64748b; font-size: 10px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Header & Responsive Navbar -->
+        <!-- Header & Fixed Navbar -->
         <header>
             <a href="index.html" class="logo-area">
                 <div class="logo-icon">P</div>
@@ -107,13 +102,13 @@
             <div class="header-right">
                 <button id="installAppBtn" class="install-btn" onclick="installApp()">📥 Install</button>
                 <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-                <div class="nav-links" id="navLinks">
+                <div class="nav-dropdown" id="navDropdown">
                     <button onclick="location.href='index.html'">🏠 Home</button>
                     <button id="langToggleBtn" onclick="toggleLanguage()">🇧🇩 বাংলা</button>
                     <a href="blog.html">Blog</a>
                     <a href="contact.html">Contact</a>
                     <a href="admin.html">Admin</a>
-                    <span style="font-size: 11px; color: #94a3b8; padding: 2px;">Visitors: 1</span>
+                    <span style="font-size: 10px; color: #94a3b8; padding: 4px;">Visitors: 1</span>
                 </div>
             </div>
         </header>
@@ -140,7 +135,7 @@
                         <option value="openverse">Openverse API (Creative Commons)</option>
                         <option value="freesound">FreeSound API (Ambient Audio)</option>
                     </select>
-                    <input type="number" id="customCount" placeholder="Count (30)" min="1" max="100" style="width: 100px;">
+                    <input type="number" id="customCount" placeholder="Count (20)" min="1" max="100" style="width: 90px;">
                     <button onclick="searchMedia()">Search & Fetch</button>
                 </div>
 
@@ -163,7 +158,7 @@
         <!-- Gemini Free API Live AI Generator -->
         <section class="section-box">
             <h2>Live AI Prompt & Assistant Generator (Gemini Powered)</h2>
-            <p>Type in any language (English, Bengali, etc.), and AI will respond instantly in the exact same language:</p>
+            <p>Type in any language, and AI will respond instantly in the exact same language:</p>
             <div class="ai-chat-box" id="aiChatBox">
                 <div style="color: #94a3b8;">AI Assistant: Hello! How can I help you today? / আপনাকে কীভাবে সাহায্য করতে পারি?</div>
             </div>
@@ -180,18 +175,18 @@
     </div>
 
     <!-- Preview Modal -->
-    <div id="previewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; align-items:center; justify-content:center; padding:12px;">
-        <div style="background:var(--card-bg); max-width:550px; width:100%; padding:15px; border-radius:10px; border:1px solid var(--border-color); position:relative;">
-            <button onclick="closePreview()" style="position:absolute; top:8px; right:12px; background:none; border:none; color:#fff; font-size:18px; cursor:pointer;">&times;</button>
-            <h3 style="color:var(--accent-color); margin-bottom:8px; font-size:14px;">Media Live Preview</h3>
-            <div id="modalPreviewContent" style="text-align:center; max-height:320px; overflow:hidden;"></div>
+    <div id="previewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; align-items:center; justify-content:center; padding:10px;">
+        <div style="background:var(--card-bg); max-width:500px; width:100%; padding:14px; border-radius:10px; border:1px solid var(--border-color); position:relative;">
+            <button onclick="closePreview()" style="position:absolute; top:6px; right:10px; background:none; border:none; color:#fff; font-size:18px; cursor:pointer;">&times;</button>
+            <h3 style="color:var(--accent-color); margin-bottom:6px; font-size:13px;">Media Live Preview</h3>
+            <div id="modalPreviewContent" style="text-align:center; max-height:280px; overflow:hidden;"></div>
         </div>
     </div>
 
     <script>
-        // Hamburger Menu Toggle
+        // Dropdown Menu Toggle
         function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+            document.getElementById('navDropdown').classList.toggle('active');
         }
 
         // Language Toggle
@@ -207,8 +202,8 @@
             }
         }
 
-        // Gemini AI Integration - responding in user's input language
-        function sendToGeminiAI() {
+        // Gemini AI Integration using backend.js
+        async function sendToGeminiAI() {
             const input = document.getElementById('aiUserInput');
             const chatBox = document.getElementById('aiChatBox');
             const query = input.value.trim();
@@ -217,18 +212,16 @@
             chatBox.innerHTML += `<div style="text-align:right; color:var(--accent-color);">You: ${query}</div>`;
             input.value = '';
 
-            setTimeout(() => {
-                let aiResponse = `Gemini AI Live Response: Detailed execution guide for "${query}" with high-end 4K production standards.`;
-                // Check if input contains Bengali characters
-                if(/[\u0980-\u09FF]/.test(query)) {
-                    aiResponse = `জেমিনি এআই লাইভ উত্তর: আপনার "${query}" প্রম্পটটির জন্য নিখুঁত ফোরকে রেজ্যুলেশন এবং সাউন্ডস্কেপ গাইডলাইন প্রস্তুত করা হয়েছে।`;
-                }
-                chatBox.innerHTML += `<div style="color:var(--text-color);">AI: ${aiResponse}</div>`;
+            try {
+                const responseText = await PPAIBackend.generateAIResponse(query);
+                chatBox.innerHTML += `<div style="color:var(--text-color);">AI: ${responseText}</div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
-            }, 300);
+            } catch (error) {
+                chatBox.innerHTML += `<div style="color:red;">AI Error: Failed to generate response.</div>`;
+            }
         }
 
-        // Real Media Search & Fetching
+        // Real Media Search & Fetching using backend.js
         async function searchMedia() {
             const query = document.getElementById('searchInput').value.trim();
             const api = document.getElementById('apiSource').value;
@@ -243,34 +236,29 @@
             grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--accent-color);">Fetching real items for "${query}" from ${api.toUpperCase()}...</p>`;
 
             try {
+                const items = await PPAIBackend.fetchMedia(query, api, count, mediaType);
                 let html = '';
-                for(let i = 1; i <= Math.min(count, 15); i++) {
-                    let isAudio = (mediaType === 'audio' || api === 'freesound');
-                    let mediaUrl = isAudio 
-                        ? 'https://actions.google.com/sounds/v1/ambiences/rain_heavy.ogg' 
-                        : (mediaType === 'video' || api === 'pexels' && i % 2 === 0)
-                            ? 'https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4'
-                            : `https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=600&q=80&sig=${i}`;
-                    
+                items.forEach(item => {
+                    let isAudio = (item.type === 'audio');
                     html += `
                         <div class="media-card">
                             ${isAudio 
-                                ? `<div style="background:#1e293b; height:100px; display:flex; align-items:center; justify-content:center; color:#38bdf8; font-weight:bold;">🎵 Audio #${i}</div>`
-                                : mediaType === 'video' 
-                                    ? `<video src="${mediaUrl}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`
-                                    : `<img src="${mediaUrl}" alt="${query}">`
+                                ? `<div style="background:#1e293b; height:100px; display:flex; align-items:center; justify-content:center; color:#38bdf8; font-weight:bold;">🎵 Audio Track</div>`
+                                : item.type === 'video' 
+                                    ? `<video src="${item.url}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`
+                                    : `<img src="${item.url}" alt="${query}">`
                             }
                             <div class="media-info">
-                                <p><strong>Source:</strong> ${api.toUpperCase()}</p>
-                                <p><strong>Query:</strong> ${query}</p>
+                                <p><strong>Source:</strong> ${item.source}</p>
+                                <p><strong>Title:</strong> ${item.title}</p>
                             </div>
                             <div class="media-actions">
-                                <button class="btn-preview" onclick="previewMedia('${mediaUrl}', '${isAudio ? 'audio' : 'visual'}')">Preview</button>
-                                <button class="btn-download" onclick="downloadFile('${mediaUrl}', 'ppai_${i}.${isAudio ? 'mp3' : 'jpg'}')">Download</button>
+                                <button class="btn-preview" onclick="previewMedia('${item.url}', '${item.type}')">Preview</button>
+                                <button class="btn-download" onclick="downloadFile('${item.url}', 'ppai_${item.id}.${isAudio ? 'mp3' : 'jpg'}')">Download</button>
                             </div>
                         </div>
                     `;
-                }
+                });
                 grid.innerHTML = html;
             } catch (error) {
                 grid.innerHTML = `<p style="color:red; text-align:center;">Failed to fetch real media.</p>`;
@@ -281,11 +269,11 @@
             const modal = document.getElementById('previewModal');
             const content = document.getElementById('modalPreviewContent');
             if(type === 'audio') {
-                content.innerHTML = `<audio controls src="${url}" style="width:100%; margin-top:15px;"></audio>`;
-            } else if(url.endsWith('.mp4')) {
-                content.innerHTML = `<video controls autoplay src="${url}" style="max-width:100%; max-height:280px; border-radius:6px;"></video>`;
+                content.innerHTML = `<audio controls src="${url}" style="width:100%; margin-top:10px;"></audio>`;
+            } else if(type === 'video') {
+                content.innerHTML = `<video controls autoplay src="${url}" style="max-width:100%; max-height:260px; border-radius:6px;"></video>`;
             } else {
-                content.innerHTML = `<img src="${url}" style="max-width:100%; max-height:280px; border-radius:6px;" alt="Preview">`;
+                content.innerHTML = `<img src="${url}" style="max-width:100%; max-height:260px; border-radius:6px;" alt="Preview">`;
             }
             modal.style.display = 'flex';
         }
