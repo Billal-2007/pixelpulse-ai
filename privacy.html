@@ -2,32 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Privacy Policy - PixelPulse AI (PPAI)</title>
     <style>
         :root { --bg-color: #0b0f19; --card-bg: #131d31; --text-color: #f1f5f9; --accent-color: #38bdf8; --border-color: #1e293b; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); }
-        h1 { color: var(--accent-color); margin-bottom: 20px; }
-        p, li { color: #94a3b8; font-size: 14px; margin-bottom: 12px; }
-        ul { margin-left: 20px; margin-bottom: 15px; }
-        .back-home { display: inline-block; margin-top: 20px; color: var(--accent-color); text-decoration: none; font-weight: bold; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 12px; }
+        .container { max-width: 900px; margin: 0 auto; width: 100%; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .logo-area { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-color); }
+        .logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg, #38bdf8, #2563eb); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 14px; }
+        .logo-text { font-size: 15px; font-weight: bold; color: var(--accent-color); }
+        .section-box { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 15px; }
+        h1, h2 { color: var(--accent-color); margin-bottom: 10px; }
+        p { font-size: 13px; color: #94a3b8; margin-bottom: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Privacy Policy</h1>
-        <p>Last updated: October 2026</p>
-        <p>At PixelPulse AI (PPAI), accessible from our website, your privacy is a top priority. This Privacy Policy document outlines the types of information collected and recorded by PPAI and how we use it.</p>
-        
-        <h3 style="color:var(--text-color); margin: 15px 0 8px;">Information We Collect</h3>
-        <p>We use APIs from Pexels, Pixabay, Openverse, Unsplash, and FreeSound to fetch media. We do not store personal media files or user credentials without explicit consent.</p>
-        
-        <h3 style="color:var(--text-color); margin: 15px 0 8px;">Firebase & Caching</h3>
-        <p>We utilize Firebase Realtime Database for caching trending searches and tracking system operational status safely.</p>
-        
-        <a href="index.html" class="back-home">← Back to Home</a>
+        <header>
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon">P</div>
+                <div class="logo-text">PixelPulse AI 🚀</div>
+            </a>
+            <a href="index.html" style="color: var(--accent-color); text-decoration: none; font-size: 13px; font-weight: bold;">← Back to Home</a>
+        </header>
+
+        <section class="section-box">
+            <h1>Privacy Policy</h1>
+            <p>Effective Date: October 2026</p>
+            <p>At PixelPulse AI (PPAI), developed by SM Billal Hossain Shakil, we prioritize user privacy. This privacy policy document outlines the types of information collected and recorded by our platform and how we use it.</p>
+            <h2>Data Collection & Firebase Security</h2>
+            <p>We utilize secure Firebase backend infrastructure and analytics to track general visitor counts while keeping sensitive configurations strictly isolated. We do not store or share personal user data.</p>
+        </section>
     </div>
 </body>
 </html>
