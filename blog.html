@@ -2,37 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Blog & Tutorials - PixelPulse AI (PPAI)</title>
     <style>
         :root { --bg-color: #0b0f19; --card-bg: #131d31; --text-color: #f1f5f9; --accent-color: #38bdf8; --border-color: #1e293b; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
-        .logo { color: var(--accent-color); font-weight: bold; text-decoration: none; font-size: 18px; }
-        .post-card { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 15px; }
-        .post-card h3 { color: var(--accent-color); margin-bottom: 8px; }
-        .post-card p { color: #94a3b8; font-size: 13px; }
-        .back-home { color: var(--accent-color); text-decoration: none; font-weight: bold; font-size: 13px; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 12px; }
+        .container { max-width: 900px; margin: 0 auto; width: 100%; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .logo-area { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-color); }
+        .logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg, #38bdf8, #2563eb); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 14px; }
+        .logo-text { font-size: 15px; font-weight: bold; color: var(--accent-color); }
+        .section-box { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 15px; }
+        h1, h2 { color: var(--accent-color); margin-bottom: 10px; }
+        p { font-size: 13px; color: #94a3b8; margin-bottom: 10px; }
+        .back-home { display: inline-block; margin-top: 15px; color: var(--accent-color); text-decoration: none; font-size: 13px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <a href="index.html" class="logo">PPAI Blog 🚀</a>
-            <a href="index.html" class="back-home">← Home</a>
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon">P</div>
+                <div class="logo-text">PixelPulse AI 🚀</div>
+            </a>
+            <a href="index.html" style="color: var(--accent-color); text-decoration: none; font-size: 13px; font-weight: bold;">← Back to Home</a>
         </header>
 
-        <div class="post-card">
-            <h3>How to Build 1-2 Hour Wildlife Documentaries</h3>
-            <p>Learn step-by-step how to source 4K clips from Pexels and Pixabay, pair them with ambient nature sounds, and maintain high audience retention for Discovery-style YouTube channels.</p>
-        </div>
+        <section class="section-box">
+            <h1>PixelPulse AI Official Blog & Tutorials</h1>
+            <p>Welcome to the official blog hub. Here you will find expert guides on how to utilize 4K/8K copyright-free media for professional YouTube documentary creation, wildlife compilation editing, and AI prompt engineering.</p>
+        </section>
 
-        <div class="post-card">
-            <h3>Mastering AI Cinematic Prompt Engineering</h3>
-            <p>Discover how to structure wildlife and nature prompts effectively using subject dropdowns and camera movement keywords.</p>
-        </div>
+        <section class="section-box">
+            <h2>Latest Article: How to Create 2-Hour Nature Documentaries</h2>
+            <p>Published by SM Billal Hossain Shakil | October 2026</p>
+            <p>Creating long-form nature and wildlife compilation videos requires high-resolution clips from trusted real-time backends like Pexels, Pixabay, and Unsplash. By keeping clip durations concise (5-8 seconds) and pairing them with ambient sounds from FreeSound, creators can significantly boost audience retention.</p>
+        </section>
+
+        <a href="index.html" class="back-home">← Return to Main Application</a>
     </div>
 </body>
 </html>
