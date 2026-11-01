@@ -2,24 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Terms of Service - PixelPulse AI (PPAI)</title>
     <style>
         :root { --bg-color: #0b0f19; --card-bg: #131d31; --text-color: #f1f5f9; --accent-color: #38bdf8; --border-color: #1e293b; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); }
-        h1 { color: var(--accent-color); margin-bottom: 20px; }
-        p { color: #94a3b8; font-size: 14px; margin-bottom: 12px; }
-        .back-home { display: inline-block; margin-top: 20px; color: var(--accent-color); text-decoration: none; font-weight: bold; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; padding: 12px; }
+        .container { max-width: 900px; margin: 0 auto; width: 100%; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .logo-area { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-color); }
+        .logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg, #38bdf8, #2563eb); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 14px; }
+        .logo-text { font-size: 15px; font-weight: bold; color: var(--accent-color); }
+        .section-box { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 15px; }
+        h1, h2 { color: var(--accent-color); margin-bottom: 10px; }
+        p { font-size: 13px; color: #94a3b8; margin-bottom: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Terms of Service</h1>
-        <p>Welcome to PixelPulse AI (PPAI). By accessing our web application, you agree to comply with and be bound by the following terms.</p>
-        <p>All media fetched via our platform from Pexels, Pixabay, Unsplash, and Openverse are subject to their respective copyright and Creative Commons licenses. Users are responsible for adhering to source platform guidelines.</p>
-        <a href="index.html" class="back-home">← Back to Home</a>
+        <header>
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon">P</div>
+                <div class="logo-text">PixelPulse AI 🚀</div>
+            </a>
+            <a href="index.html" style="color: var(--accent-color); text-decoration: none; font-size: 13px; font-weight: bold;">← Back to Home</a>
+        </header>
+
+        <section class="section-box">
+            <h1>Terms of Service</h1>
+            <p>By accessing PixelPulse AI (PPAI), you agree to comply with these terms of service. All rights, code structures, and platform architecture are developed and copyrighted by SM Billal Hossain Shakil.</p>
+            <h2>Media Usage</h2>
+            <p>Media files fetched via Pexels, Pixabay, Unsplash, Openverse, and FreeSound APIs are governed by their respective platform licenses and terms.</p>
+        </section>
     </div>
 </body>
 </html>
